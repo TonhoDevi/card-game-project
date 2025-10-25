@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfr0th4nvohqj"]
+[gd_scene load_steps=5 format=3 uid="uid://dfr0th4nvohqj"]
 
+[ext_resource type="Script" uid="uid://cbxcwavqwvr35" path="res://Scenes/card.gd" id="1_7xeok"]
 [ext_resource type="Texture2D" uid="uid://ca82timrodrkb" path="res://1_Free Pack/Card Sprites/_Card Back Elements/big decor (8).png" id="1_dwopy"]
 [ext_resource type="Texture2D" uid="uid://x4wgiij3y2ke" path="res://1_Free Pack/Generated Art/paladin spell.webp" id="2_7xeok"]
 
@@ -7,6 +8,7 @@
 size = Vector2(128, 176)
 
 [node name="Card" type="Node2D"]
+script = ExtResource("1_7xeok")
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -21,3 +23,6 @@ texture = ExtResource("2_7xeok")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_dwopy")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
