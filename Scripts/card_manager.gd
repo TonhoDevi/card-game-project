@@ -7,9 +7,11 @@ const COLLISION_MAKS_CARD_SLOT : int = 2
 var screen_size : Vector2
 var card_being_dragged : Node2D
 var is_hovering_card : bool
+var player_monster_card_this_turn : bool
+
 var player_hand_ref : Node
 var card_deck_ref : Node
-var player_monster_card_this_turn : bool
+var card_vci_ref : Node
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +19,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	player_hand_ref = get_node("../PlayerHand")
 	card_deck_ref = get_node("../CardDeck")
+	card_vci_ref = preload("res://Scripts/visual_card_interaction.gd").new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void: 
@@ -69,7 +72,7 @@ func start_drag(card : Node2D):
 	
 
 
-# 
+# Stop dragging the card 
 func stop_drag():
 	if card_being_dragged:
 		var card_slot_found : Node2D = raycast_check_for_card_slot()
@@ -83,6 +86,7 @@ func stop_drag():
 					card_being_dragged.card_slot_card_is_in = card_slot_found
 					card_being_dragged.position = card_slot_found.position
 					card_being_dragged.get_node("Area2D").set_deferred("monitoring",false)
+					card_vci_ref.minimize_card(card_being_dragged)
 					card_slot_found.card_in_slot = true
 					card_being_dragged = null
 					return		

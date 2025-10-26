@@ -10,17 +10,13 @@ func connect_card_signals(card: Node2D) -> void:
 
 # Helper functions for card hovering
 func on_card_mouse_entered(card: Node2D) -> void:
-	print("Hovering card")
 	if !card.card_slot_card_is_in:
 		highlight_card(card,true)
 	
 # Helper functions for card hovering
 func on_card_mouse_exited(card: Node2D) -> void:
-	print("Stopped hovering card")
 	if !card.card_slot_card_is_in:
 		highlight_card(card,false)
-	else:
-		minimize_card(card)
 
 # Helper function to highlight cards
 func highlight_card(card, hovering: bool):

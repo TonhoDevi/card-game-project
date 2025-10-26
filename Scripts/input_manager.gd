@@ -1,7 +1,7 @@
 extends Node2D
 
-const COLLISION_MAKS_CARD : int = 1
-const COLLISION_MAKS_CARD_DECK : int = 4
+const COLLISION_MASK_CARD : int = 1
+const COLLISION_MASK_CARD_DECK : int = 4
 var card_manager_ref : Node
 var deck_ref : Node
 
@@ -26,12 +26,12 @@ func ray_cast_at_cursor():
 	var result = space_state.intersect_point(parametres)
 	if result.size() > 0:
 		var result_collision_mask = result[0].collider.collision_mask
-		if result_collision_mask == COLLISION_MAKS_CARD:
+		if result_collision_mask == COLLISION_MASK_CARD:
 			var card_found = result[0].collider.get_parent()
 			if card_found:
 				card_manager_ref.start_drag(card_found)
 
-		elif result_collision_mask == COLLISION_MAKS_CARD_DECK:
+		elif result_collision_mask == COLLISION_MASK_CARD_DECK:
 			var card_deck = result[0].collider.get_parent()
 			if card_deck:
 				deck_ref.draw_deck()

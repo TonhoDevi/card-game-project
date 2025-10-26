@@ -5,7 +5,7 @@ extends Button
 var turn_number: int = 1
 
 
-func _on_ready() -> void:
+func _ready() -> void:
 	turn_number_label.text = str(turn_number)
 
 
