@@ -1,7 +1,7 @@
 extends Node2D
 
-const HAND_CONT = 2
-const HAND_Y_POSITION = 600
+const HAND_CONT = 5
+const HAND_Y_POSITION = 800
 const CARD_WIDTH = 200
 var player_hand = []
 var centre_screen_x
@@ -16,21 +16,24 @@ func _ready() -> void:
 
 
 func add_card_to_hand(card):
-	player_hand.insert(0,card)
-	update_hand_positions()
-
+	if card not in player_hand:
+		player_hand.insert(0,card)
+		update_hand_positions()
+	else:
+		animate_card_to_position(card, card.start_position)
 
 func update_hand_positions():
 	var hand_size = player_hand.size()
 	for i in range(hand_size):
 		var new_position = Vector2(calculate_card_position(i), HAND_Y_POSITION)
 		var card = player_hand[i]
+		card.start_position = new_position
 		animate_card_to_position(card,new_position)
 
 
 func calculate_card_position(index):
 	var total_cards = (player_hand.size() - 1) * CARD_WIDTH
-	var x_offset = centre_screen_x + (index * CARD_WIDTH) - (total_cards / 2)
+	var x_offset = centre_screen_x + index * CARD_WIDTH - total_cards / 2
 	return x_offset
 
 
