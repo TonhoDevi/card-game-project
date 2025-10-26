@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://175mswtjaoib"
-path="res://.godot/imported/neutral landmark.webp-764939c5ff41fc31b7c4462b8d3cc37d.ctex"
+uid="uid://cg618m65xwnjq"
+path="res://.godot/imported/Roruja.webp-0d36d67a30303a329784bb072f1fc5c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/neutral landmark.webp"
-dest_files=["res://.godot/imported/neutral landmark.webp-764939c5ff41fc31b7c4462b8d3cc37d.ctex"]
+source_file="res://Assets/Cards/Roruja.webp"
+dest_files=["res://.godot/imported/Roruja.webp-0d36d67a30303a329784bb072f1fc5c2.ctex"]
 
 [params]
 

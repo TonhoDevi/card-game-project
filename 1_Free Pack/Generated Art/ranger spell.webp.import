@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bct0fqkdqf34y"
-path="res://.godot/imported/neutral talent.webp-8e307db2efc2d83f4008cc9b661bdba9.ctex"
+uid="uid://d1ltclxjq2wds"
+path="res://.godot/imported/ranger spell.webp-ef2dd5f96f5cb76cd9771201232e47fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/neutral talent.webp"
-dest_files=["res://.godot/imported/neutral talent.webp-8e307db2efc2d83f4008cc9b661bdba9.ctex"]
+source_file="res://1_Free Pack/Generated Art/ranger spell.webp"
+dest_files=["res://.godot/imported/ranger spell.webp-ef2dd5f96f5cb76cd9771201232e47fc.ctex"]
 
 [params]
 

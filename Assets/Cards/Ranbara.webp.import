@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du000gxu4vyui"
-path="res://.godot/imported/paladin minion.webp-0914ceb4f7e12a03cb75554864a2ca1c.ctex"
+uid="uid://rij7fhm7taf1"
+path="res://.godot/imported/Ranbara.webp-6d15bf3c9674e43bc5d8ef1933a46092.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/paladin minion.webp"
-dest_files=["res://.godot/imported/paladin minion.webp-0914ceb4f7e12a03cb75554864a2ca1c.ctex"]
+source_file="res://Assets/Cards/Ranbara.webp"
+dest_files=["res://.godot/imported/Ranbara.webp-6d15bf3c9674e43bc5d8ef1933a46092.ctex"]
 
 [params]
 

@@ -1,13 +1,203 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfr0th4nvohqj"]
+[gd_scene load_steps=10 format=3 uid="uid://dfr0th4nvohqj"]
 
-[ext_resource type="Script" uid="uid://cbxcwavqwvr35" path="res://Scenes/card.gd" id="1_7xeok"]
+[ext_resource type="Script" uid="uid://cbxcwavqwvr35" path="res://Scripts/card.gd" id="1_7xeok"]
 [ext_resource type="Texture2D" uid="uid://ca82timrodrkb" path="res://1_Free Pack/Card Sprites/_Card Back Elements/big decor (8).png" id="1_dwopy"]
-[ext_resource type="Texture2D" uid="uid://x4wgiij3y2ke" path="res://1_Free Pack/Generated Art/paladin spell.webp" id="2_7xeok"]
+[ext_resource type="Texture2D" uid="uid://rij7fhm7taf1" path="res://Assets/Cards/Ranbara.webp" id="3_brehn"]
+[ext_resource type="Texture2D" uid="uid://dwwhuhyepdgmw" path="res://1_Free Pack/Card Sprites/Card Back/_cover.png" id="4_eumee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwopy"]
 size = Vector2(128, 176)
 
+[sub_resource type="SystemFont" id="SystemFont_brehn"]
+font_names = PackedStringArray("OCR A")
+multichannel_signed_distance_field = true
+msdf_pixel_range = 64
+msdf_size = 64
+
+[sub_resource type="Animation" id="Animation_e6po8"]
+resource_name = "card_flip"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardBackImage:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.155, 0.155), Vector2(0.016, 0.155), Vector2(0.16, 0.155)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardBackImage:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, -1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CardImage:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2133333, 0.21333332), Vector2(0.021, 0.213), Vector2(0.21, 0.213)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CardImage:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.02, 0.2), Vector2(0.2, 0.2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bnspj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardBackImage:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.155, 0.155)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardBackImage:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CardImage:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2133333, 0.21333332)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CardImage:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Body:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Body:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xnv4g"]
+_data = {
+&"RESET": SubResource("Animation_bnspj"),
+&"card_flip": SubResource("Animation_e6po8")
+}
+
 [node name="Card" type="Node2D"]
+scale = Vector2(0.85, 0.85)
 script = ExtResource("1_7xeok")
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -17,12 +207,79 @@ texture = ExtResource("1_dwopy")
 [node name="CardImage" type="Sprite2D" parent="."]
 position = Vector2(0, -23.999996)
 scale = Vector2(0.2133333, 0.21333332)
-texture = ExtResource("2_7xeok")
+texture = ExtResource("3_brehn")
+
+[node name="CardBackImage" type="Sprite2D" parent="."]
+scale = Vector2(0.155, 0.155)
+texture = ExtResource("4_eumee")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_dwopy")
+
+[node name="Control" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Attack" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 40.0
+offset_right = -24.0
+offset_bottom = 88.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("SystemFont_brehn")
+theme_override_font_sizes/normal_font_size = 32
+text = "5"
+scroll_active = false
+tab_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 40.0
+offset_right = 16.0
+offset_bottom = 88.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("SystemFont_brehn")
+theme_override_font_sizes/normal_font_size = 32
+text = "5"
+scroll_active = false
+tab_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaCost" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 56.0
+offset_bottom = 88.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("SystemFont_brehn")
+theme_override_font_sizes/normal_font_size = 32
+text = "5"
+scroll_active = false
+tab_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xnv4g")
+}
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

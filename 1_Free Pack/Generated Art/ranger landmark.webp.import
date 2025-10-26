@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1ltclxjq2wds"
-path="res://.godot/imported/neutral spell.webp-2af374e92bb431e5041cac8e343c8309.ctex"
+uid="uid://175mswtjaoib"
+path="res://.godot/imported/ranger landmark.webp-9b0213ee941fc3e949024358ca4b8f09.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/neutral spell.webp"
-dest_files=["res://.godot/imported/neutral spell.webp-2af374e92bb431e5041cac8e343c8309.ctex"]
+source_file="res://1_Free Pack/Generated Art/ranger landmark.webp"
+dest_files=["res://.godot/imported/ranger landmark.webp-9b0213ee941fc3e949024358ca4b8f09.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rij7fhm7taf1"
-path="res://.godot/imported/neutral minion.webp-7b4028307a3fa99350d106565db27033.ctex"
+uid="uid://du000gxu4vyui"
+path="res://.godot/imported/Pachorro.webp-8736196d651ab6d1e071ab480c57181f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/neutral minion.webp"
-dest_files=["res://.godot/imported/neutral minion.webp-7b4028307a3fa99350d106565db27033.ctex"]
+source_file="res://Assets/Cards/Pachorro.webp"
+dest_files=["res://.godot/imported/Pachorro.webp-8736196d651ab6d1e071ab480c57181f.ctex"]
 
 [params]
 

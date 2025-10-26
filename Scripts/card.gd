@@ -9,6 +9,7 @@ var start_position
 func _ready() -> void:
 	# Connect signals to the card manager
 	get_parent().connect_card_signals(self)
+	
 
 
 func _on_area_2d_mouse_exited() -> void:

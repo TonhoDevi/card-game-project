@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg618m65xwnjq"
-path="res://.godot/imported/rogue minion.webp-517f523dbdb2f0d98d471a76ad06c2e0.ctex"
+uid="uid://bct0fqkdqf34y"
+path="res://.godot/imported/ranger talent.webp-eace548895e4e399522194af71e16fa6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/rogue minion.webp"
-dest_files=["res://.godot/imported/rogue minion.webp-517f523dbdb2f0d98d471a76ad06c2e0.ctex"]
+source_file="res://1_Free Pack/Generated Art/ranger talent.webp"
+dest_files=["res://.godot/imported/ranger talent.webp-eace548895e4e399522194af71e16fa6.ctex"]
 
 [params]
 
