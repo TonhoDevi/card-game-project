@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1ltclxjq2wds"
-path="res://.godot/imported/ranger spell.webp-ef2dd5f96f5cb76cd9771201232e47fc.ctex"
+uid="uid://dglr4fr54222w"
+path="res://.godot/imported/rogue spell.webp-4304911c34170017483cda4d1623f864.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/ranger spell.webp"
-dest_files=["res://.godot/imported/ranger spell.webp-ef2dd5f96f5cb76cd9771201232e47fc.ctex"]
+source_file="res://Assets/Cards/rogue spell.webp"
+dest_files=["res://.godot/imported/rogue spell.webp-4304911c34170017483cda4d1623f864.ctex"]
 
 [params]
 

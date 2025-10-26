@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dglr4fr54222w"
-path="res://.godot/imported/rogue spell.webp-52f97ef72e2c9fd275c033ccb1b48748.ctex"
+uid="uid://x4wgiij3y2ke"
+path="res://.godot/imported/Estandarte_De_Cura.webp-1ac5923512b56b7b487a0f21e09bd0ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/rogue spell.webp"
-dest_files=["res://.godot/imported/rogue spell.webp-52f97ef72e2c9fd275c033ccb1b48748.ctex"]
+source_file="res://Assets/Cards/Estandarte_De_Cura.webp"
+dest_files=["res://.godot/imported/Estandarte_De_Cura.webp-1ac5923512b56b7b487a0f21e09bd0ce.ctex"]
 
 [params]
 

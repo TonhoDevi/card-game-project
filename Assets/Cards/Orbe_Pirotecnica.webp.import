@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b856rdvnuwy77"
-path="res://.godot/imported/warlock spell.webp-102faf39bf8112c6c1525a74c29228f0.ctex"
+path="res://.godot/imported/Orbe_Pirotecnica.webp-f2e5cc915a66fb40a7ff4163ae1bd64c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_Free Pack/Generated Art/warlock spell.webp"
-dest_files=["res://.godot/imported/warlock spell.webp-102faf39bf8112c6c1525a74c29228f0.ctex"]
+source_file="res://Assets/Cards/Orbe_Pirotecnica.webp"
+dest_files=["res://.godot/imported/Orbe_Pirotecnica.webp-f2e5cc915a66fb40a7ff4163ae1bd64c.ctex"]
 
 [params]
 

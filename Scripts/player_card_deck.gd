@@ -1,6 +1,6 @@
 extends Node2D
 
-var player_deck : Array = ["Pachorro", "Wargato", "Ranbara", "Roruja", "Pachorro", "Wargato", "Ranbara", "Roruja", "Pachorro", "Wargato"]
+var player_deck : Array = ["Pachorro", "Wargato", "Ranbara", "Espirito_Protetor", "Orbe_Pirotecnica", "Estandarte_De_Cura", "Ranbara", "Wargato"]
 var card_data_ref
 var have_drawed_card: bool = false
 var STARTER_DECK_SIZE: int = 3
@@ -8,7 +8,7 @@ var STARTER_DECK_SIZE: int = 3
 func _ready() -> void:
 	player_deck.shuffle() #
 	$Control/RichTextLabel.text = str(player_deck.size())
-	card_data_ref = preload("res://Scripts/card_data_base.gd")
+	card_data_ref = preload("res://Scripts/universal_card_data_base.gd")
 	for i in range(STARTER_DECK_SIZE):
 		draw_deck()
 		have_drawed_card = false

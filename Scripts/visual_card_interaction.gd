@@ -28,8 +28,17 @@ func highlight_card(card, hovering: bool):
 		card.scale = DEFAULT_SCALE_NODE
 		card.z_index = 1
 		card.modulate = Color(1,1,1,1)
-
+# Helper function to minimize card attack
 func minimize_card(card):
 	card.scale = SMALL_SCALE_NODE
 	card.z_index = 0
 	card.modulate = Color(1,1,1,1)
+
+# Helper function to animate card attack
+func animate_card_attack(card: Node2D, target_position: Vector2) -> void:
+	var tween : Tween = get_tree().create_tween()
+	var original_position : Vector2 = card.position
+	var attack_position : Vector2 = target_position.direction_to(original_position) * 30 + target_position
+	tween.tween_property(card, "position", attack_position, 0.25).as_relative()
+	tween.tween_property(card, "position", original_position, 0.25)
+	await tween.finished

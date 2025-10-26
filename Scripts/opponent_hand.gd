@@ -36,6 +36,28 @@ func update_hand_positions():
 		animate_card_to_position(card,new_position)
 
 
+func get_random_hero_card() -> Node2D:
+	var hero_cards : Array = []
+	for card in opponent_hand:
+		if card.card_type == "Hero":
+			hero_cards.append(card)
+	if hero_cards.size() == 0:
+		return null
+	var random_index : int = randi_range(0, hero_cards.size()-1)
+	return hero_cards[random_index]
+
+func get_random_magic_card() -> Node2D:
+	var magic_cards : Array = []
+	for card in opponent_hand:
+		if card.card_type == "Magic":
+			magic_cards.append(card)
+	if magic_cards.size() == 0:
+		return null
+	var random_index : int = randi_range(0, magic_cards.size()-1)
+	return magic_cards[random_index]
+
+
+
 func calculate_card_position(index: int) -> float:
 	centre_screen_x = get_viewport().size.x / 2
 	var total_cards : int = (opponent_hand.size() - 1) * CARD_WIDTH
