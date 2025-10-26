@@ -1,22 +1,22 @@
 extends Node2D
 
 
-const COLLISION_MAKS_CARD = 1
-const COLLISION_MAKS_CARD_SLOT = 2
-const DEFAULT_SCALE_NODE = Vector2(0.85, 0.85)
-const SMALL_SCALE_NODE = Vector2(0.7, 0.7)
-var screen_size
-var card_being_dragged
-var is_hovering_card
-var player_hand_ref
-var card_manager_ref
+const COLLISION_MAKS_CARD : int = 1
+const COLLISION_MAKS_CARD_SLOT : int = 2
+
+var screen_size : Vector2
+var card_being_dragged : Node2D
+var is_hovering_card : bool
+var player_hand_ref : Node
+var card_deck_ref : Node
+var player_monster_card_this_turn : bool
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	player_hand_ref = get_node("../PlayerHand")
-	card_manager_ref = get_node("../CardManager")
+	card_deck_ref = get_node("../CardDeck")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void: 
@@ -47,19 +47,18 @@ func raycast_check_for_card_slot():
 	else:
 		return null
 
-func get_card_with_highest_z_index(cards):
-	var highest_z_card = cards[0].collider.get_parent()
-	var highest_z_index = highest_z_card.z_index
+func get_card_with_highest_z_index(cards : Array) -> Node2D:
+	var highest_z_card : Node2D = cards[0].collider.get_parent()
+	var highest_z_index : int = highest_z_card.z_index
 	for card in cards:
-		var current_card = card.collider.get_parent()
+		var current_card : Node2D = card.collider.get_parent()
 		if current_card.z_index > highest_z_index:
 			highest_z_card = current_card
 			highest_z_index = current_card.z_index
 	return highest_z_card
 
 
-func start_drag(card):
-	card.scale = DEFAULT_SCALE_NODE
+func start_drag(card : Node2D):
 	card_being_dragged = card
 	# Detectar se a carta ja estava em um slot
 	if card_being_dragged.get_node("Area2D").monitoring == false:
@@ -73,50 +72,33 @@ func start_drag(card):
 # 
 func stop_drag():
 	if card_being_dragged:
-		card_being_dragged.scale = DEFAULT_SCALE_NODE
-		var card_slot_found = raycast_check_for_card_slot()
+		var card_slot_found : Node2D = raycast_check_for_card_slot()
 		if card_slot_found and not card_slot_found.card_in_slot:
-			player_hand_ref.remove_card_from_hand(card_being_dragged)
-			card_being_dragged.scale = SMALL_SCALE_NODE
-			card_being_dragged.position = card_slot_found.position
-			card_being_dragged.get_node("Area2D").set_deferred("monitoring",false)
-			card_slot_found.card_in_slot = true
-		else:
-			player_hand_ref.add_card_to_hand(card_being_dragged)
+			if card_being_dragged.card_type == card_slot_found.card_slot_type:
+				if !player_monster_card_this_turn:
+					player_monster_card_this_turn = true
+					player_hand_ref.remove_card_from_hand(card_being_dragged)
+					card_being_dragged.z_index = -1
+					is_hovering_card = false
+					card_being_dragged.card_slot_card_is_in = card_slot_found
+					card_being_dragged.position = card_slot_found.position
+					card_being_dragged.get_node("Area2D").set_deferred("monitoring",false)
+					card_slot_found.card_in_slot = true
+					card_being_dragged = null
+					return		
+		player_hand_ref.add_card_to_hand(card_being_dragged)
+		card_being_dragged.card_slot_card_is_in = null
+		card_being_dragged.get_node("Area2D").set_deferred("monitoring",true)
+		card_being_dragged.z_index = 0
 		card_being_dragged = null
-#======== CARD SLOT RAYCASTING AND HELPERS ========#
+		player_hand_ref.update_hand_positions()
 
-# Connect card signals
-func connect_card_signals(card):
-	card.connect("mouse_entered_card",_on_card_mouse_entered)
-	card.connect("mouse_exited_card",_on_card_mouse_exited)
 
-# Helper functions for card hovering
-func _on_card_mouse_entered(card):
-	if !is_hovering_card:
-		is_hovering_card = true
-		highlight_card(card,true)
-	
-# Helper functions for card hovering
-func _on_card_mouse_exited(card):
-	if !card_being_dragged:
-		highlight_card(card,false)
-		var new_card_hover = raycast_check_for_card()
-		if new_card_hover:
-			highlight_card(new_card_hover,true)
-		else:
-			is_hovering_card = false
 
-# Helper function to raycast for card slots
-func highlight_card(card, hovering: bool):
-	if hovering:
-		card.scale = Vector2(1.1,1.1)
-		card.z_index = 2
-		card.modulate = Color(1,1,1,1.2)
-	else:
-		if card == card_being_dragged:
-			card.scale = SMALL_SCALE_NODE
-		else:
-			card.scale = DEFAULT_SCALE_NODE
-		card.z_index = 1
-		card.modulate = Color(1,1,1,1)
+
+
+#======== TURN MANAGEMENT ========#
+
+func end_turn():
+	player_monster_card_this_turn = false
+	card_deck_ref.have_drawed_card = false

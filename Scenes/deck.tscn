@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bie86qndjcm40"]
 
-[ext_resource type="Script" uid="uid://bs3bl44xxgqu3" path="res://Scripts/deck.gd" id="1_io7pv"]
+[ext_resource type="Script" uid="uid://bs3bl44xxgqu3" path="res://Scripts/card_deck.gd" id="1_io7pv"]
 [ext_resource type="Texture2D" uid="uid://dwwhuhyepdgmw" path="res://1_Free Pack/Card Sprites/Card Back/_cover.png" id="1_ukesx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]

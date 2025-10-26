@@ -1,13 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnbsxpkb1u631"]
+[gd_scene load_steps=12 format=3 uid="uid://cnbsxpkb1u631"]
 
+[ext_resource type="Script" uid="uid://bve5qdqyhwaoi" path="res://Scripts/end_turno.gd" id="1_50glp"]
 [ext_resource type="Script" uid="uid://d0r6h0jng6q1u" path="res://Scripts/card_manager.gd" id="1_i0p2h"]
+[ext_resource type="Script" uid="uid://cimdsq3cl0dr1" path="res://Scripts/visual_card_interaction.gd" id="3_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://ddbwng6uplhtj" path="res://Scenes/card_slot.tscn" id="3_wakut"]
 [ext_resource type="PackedScene" uid="uid://bmo7nf5hrx20k" path="res://Scenes/player_hand.tscn" id="4_31u2b"]
 [ext_resource type="PackedScene" uid="uid://bie86qndjcm40" path="res://Scenes/deck.tscn" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://d3b74llnuyu2d" path="res://Scripts/input_manager.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://b44yc6slvuve1" path="res://Scripts/magic_card_slot.gd" id="6_jw32o"]
 [ext_resource type="PackedScene" uid="uid://fgsnvc4ac4q2" path="res://Scenes/opponent_card_deck.tscn" id="6_v1gob"]
 
 [sub_resource type="SystemFont" id="SystemFont_pbw6q"]
+font_names = PackedStringArray("OCR A")
+multichannel_signed_distance_field = true
+msdf_pixel_range = 64
+msdf_size = 64
+
+[sub_resource type="SystemFont" id="SystemFont_vy5pj"]
 font_names = PackedStringArray("OCR A")
 multichannel_signed_distance_field = true
 msdf_pixel_range = 64
@@ -31,9 +40,30 @@ theme_override_fonts/font = SubResource("SystemFont_pbw6q")
 theme_override_font_sizes/font_size = 64
 text = "PASS 
 TURN"
+script = ExtResource("1_50glp")
+
+[node name="TurnNumber" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 1416.0
+offset_top = 480.0
+offset_right = 1552.0
+offset_bottom = 625.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("SystemFont_vy5pj")
+theme_override_font_sizes/normal_font_size = 64
+text = "5"
+scroll_active = false
+tab_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("1_i0p2h")
+
+[node name="VisualManager" type="Node2D" parent="CardManager"]
+script = ExtResource("3_vy5pj")
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_31u2b")]
 
@@ -45,6 +75,7 @@ position = Vector2(450, 975)
 script = ExtResource("5_pbw6q")
 
 [node name="Table" type="Node2D" parent="."]
+z_index = -2
 
 [node name="CardSlot0" parent="Table" instance=ExtResource("3_wakut")]
 position = Vector2(736, 799)
@@ -60,15 +91,19 @@ position = Vector2(1186, 799)
 
 [node name="CardSlot5" parent="Table" instance=ExtResource("3_wakut")]
 position = Vector2(736, 624)
+script = ExtResource("6_jw32o")
 
 [node name="CardSlot6" parent="Table" instance=ExtResource("3_wakut")]
 position = Vector2(886, 624)
+script = ExtResource("6_jw32o")
 
 [node name="CardSlot7" parent="Table" instance=ExtResource("3_wakut")]
 position = Vector2(1036, 624)
+script = ExtResource("6_jw32o")
 
 [node name="CardSlot8" parent="Table" instance=ExtResource("3_wakut")]
 position = Vector2(1186, 624)
+script = ExtResource("6_jw32o")
 
 [node name="OpponentTable" type="Node2D" parent="."]
 
@@ -98,3 +133,5 @@ position = Vector2(1186, 272)
 
 [node name="OpponentCardDeck" parent="." instance=ExtResource("6_v1gob")]
 position = Vector2(1470, 100)
+
+[connection signal="pressed" from="Control/EndTurno" to="Control/EndTurno" method="_on_pressed"]

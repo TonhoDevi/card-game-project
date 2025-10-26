@@ -1,13 +1,15 @@
 extends Node2D
 
-const COLLISION_MAKS_CARD = 1
-const COLLISION_MAKS_CARD_DECK = 4
-var card_manager_ref
-var deck_ref
+const COLLISION_MAKS_CARD : int = 1
+const COLLISION_MAKS_CARD_DECK : int = 4
+var card_manager_ref : Node
+var deck_ref : Node
 
 func _ready() -> void:
 	card_manager_ref = get_node("../CardManager")
 	deck_ref = get_node("../CardDeck")
+
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -17,7 +19,7 @@ func _input(event: InputEvent) -> void:
 			card_manager_ref.stop_drag()
 
 func ray_cast_at_cursor():
-	var space_state = get_world_2d().direct_space_state
+	var space_state  = get_world_2d().direct_space_state
 	var parametres = PhysicsPointQueryParameters2D.new()
 	parametres.position = get_global_mouse_position()
 	parametres.collide_with_areas = true
