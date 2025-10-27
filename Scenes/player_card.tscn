@@ -230,7 +230,6 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_left = -64.0
 offset_top = 40.0
-offset_right = -24.0
 offset_bottom = 88.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -245,9 +244,8 @@ vertical_alignment = 1
 
 [node name="Health" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = -24.0
 offset_top = 40.0
-offset_right = 16.0
+offset_right = 65.882355
 offset_bottom = 88.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -262,10 +260,10 @@ vertical_alignment = 1
 
 [node name="ManaCost" type="RichTextLabel" parent="Control"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 40.0
-offset_right = 56.0
-offset_bottom = 88.0
+offset_left = 47.058815
+offset_top = -115.29411
+offset_right = 87.058815
+offset_bottom = -67.29411
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8

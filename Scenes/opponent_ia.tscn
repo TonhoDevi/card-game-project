@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://brprmg48a660e"]
+
+[ext_resource type="Script" uid="uid://dcsjk8fbb8g71" path="res://Scripts/opponent_ia.gd" id="1_k4e7l"]
+
+[node name="OpponentIA" type="Node2D"]
+script = ExtResource("1_k4e7l")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

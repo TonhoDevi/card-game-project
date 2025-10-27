@@ -2,9 +2,10 @@ extends Node2D
 @onready var opponent_hand_ref: Node2D = $"../OpponentHand"
 @onready var opponent_table_ref: Node2D = $"../OpponentTable"
 @onready var opponent_card_deck_ref: Node2D = $"../OpponentCardDeck"
-@onready var battle_manager_ref: Node = $"../BattleManager"
+@onready var turn_manager_ref: Node = $"../TurnManager"
 @onready var player_table_ref: Node2D = $"../PlayerTable"
-@onready var visual_manager: Node2D = $"../CardManager/VisualManager"
+@onready var visual_manager: Node2D = $"../VisualManager"
+@onready var battle_manager: Node = $"../BattleManager"
 
 
 @onready var timer: Timer = $"Timer"
@@ -38,7 +39,7 @@ func start_preparation_turn() -> void:
 	
 
 func end_preparation_turn() -> void:
-	battle_manager_ref.end_opponent_preparation_turn()
+	turn_manager_ref.end_opponent_preparation_turn()
 
 
 
@@ -60,7 +61,7 @@ func start_combat_turn() -> void:
 	end_combat_turn()
 
 func end_combat_turn() -> void:
-	battle_manager_ref.end_opponent_combat_turn()
+	turn_manager_ref.end_opponent_combat_turn()
 
 	
 #=============  Move Card Actions =============
@@ -108,6 +109,7 @@ func play_hero_card(card_node: Node2D, slot_node: Node2D) -> void:
 func perform_attack(attacker_card: Node2D, target_card: Node2D) -> void:
 	# Animate attack
 	visual_manager.animate_card_attack(attacker_card, target_card.position)
+	battle_manager.attack(attacker_card,target_card,"add")
 	timer.start(wait_time_between_actions)
 	await timer.timeout
 

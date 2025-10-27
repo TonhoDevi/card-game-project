@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var card_manager_ref : Node2D = get_node("../CardManager")
-@onready var deck_ref : Node2D = get_node("../PlayerCardDeck")
+@onready var card_manager_ref : Node2D = $"../PlayerCardManager"
+@onready var deck_ref : Node2D = $"../PlayerCardDeck"
 const COLLISION_MASK_CARD : int = 1
 const COLLISION_MASK_CARD_DECK : int = 4
 var game_phase : String = "PreparationTurn"

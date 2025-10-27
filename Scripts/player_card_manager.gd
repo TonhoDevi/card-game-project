@@ -1,5 +1,9 @@
 extends Node2D
 
+@onready var player_hand_ref : Node2D = $"../PlayerHand"
+@onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
+@onready var player_table_ref : Node2D = $"../PlayerTable"
+@onready var visual_manager: Node2D = $"../VisualManager"
 
 const COLLISION_MAKS_CARD : int = 1
 const COLLISION_MAKS_CARD_SLOT : int = 2
@@ -8,12 +12,6 @@ var screen_size : Vector2
 var card_being_dragged : Node2D
 var is_hovering_card : bool
 var player_monster_card_this_turn : bool
-
-@onready var player_hand_ref : Node2D = $"../PlayerHand"
-@onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
-@onready var player_table_ref : Node2D = $"../PlayerTable"
-@onready var visual_manager: Node2D = $VisualManager
-
 
 
 # Called when the node enters the scene tree for the first time.

@@ -1,6 +1,6 @@
 extends Button
 
-@onready var card_manager: Node2D = $"../../CardManager"
+@onready var card_manager: Node2D = $"../../PlayerCardManager"
 @onready var turn_number_label: RichTextLabel = $"../TurnNumber"
 var turn_number: int = 1
 
