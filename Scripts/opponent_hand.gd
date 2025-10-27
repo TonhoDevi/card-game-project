@@ -9,9 +9,6 @@ var centre_screen_x : float
 func _ready() -> void:
 	centre_screen_x = get_viewport().size.x * 2
 	
-
-
-
 func add_card_to_hand(card: Node2D):
 	if card not in opponent_hand:
 		opponent_hand.insert(0,card)

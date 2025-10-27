@@ -15,20 +15,19 @@ func _ready() -> void:
 	have_drawed_card = true 
 
 func draw_deck():
+	# Prevent drawing multiple cards at once
 	if have_drawed_card:
 		return
 	have_drawed_card = true
+	# Draw the top card from the deck
 	var card_drawn_name: String = player_deck[0]
 	player_deck.erase(card_drawn_name)
-
-
+	# Check if deck is empty
 	if player_deck.size() == 0:
 		$Area2D/CollisionShape2D.disabled = true
 		$Sprite2D.visible = false
 		$Control/RichTextLabel.visible = false
-
-
-
+	# Create new card instance
 	var new_card : Node = preload("res://Scenes/card.tscn").instantiate()
 	new_card.global_position = global_position
 	var card_image_path : String = "res://Assets/Cards/" + card_drawn_name + ".webp"
@@ -37,7 +36,6 @@ func draw_deck():
 	new_card.get_node("Control/ManaCost").text = str(card_data_ref.CARD_DATA[card_drawn_name][2])
 	new_card.card_type = card_data_ref.CARD_DATA[card_drawn_name][3]
 	new_card.get_node("CardImage").texture = load(card_image_path)
-
 	$"../CardManager".add_child(new_card)
 	new_card.name = "Card"
 	new_card.get_node("AnimationPlayer").play("card_flip")

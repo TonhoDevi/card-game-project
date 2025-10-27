@@ -3,6 +3,7 @@ extends Node
 const BIG_SCALE_NODE : Vector2 = Vector2(1.1, 1.1)
 const DEFAULT_SCALE_NODE : Vector2 = Vector2(0.85, 0.85)
 const SMALL_SCALE_NODE : Vector2 = Vector2(0.7, 0.7)
+@onready var timer: Timer = $"Timer"
 # Connect card signals
 func connect_card_signals(card: Node2D) -> void:
 	card.connect("mouse_entered_card", on_card_mouse_entered)
@@ -38,7 +39,11 @@ func minimize_card(card):
 func animate_card_attack(card: Node2D, target_position: Vector2) -> void:
 	var tween : Tween = get_tree().create_tween()
 	var original_position : Vector2 = card.position
-	var attack_position : Vector2 = target_position.direction_to(original_position) * 30 + target_position
-	tween.tween_property(card, "position", attack_position, 0.25).as_relative()
-	tween.tween_property(card, "position", original_position, 0.25)
-	await tween.finished
+	var attack_position : Vector2 = target_position
+	tween.tween_property(card, "position", attack_position, 0.25)
+	timer.start(0.25)
+	await timer.timeout
+	var tween2 : Tween = get_tree().create_tween()
+	tween2.tween_property(card, "position", original_position, 0.25)
+	timer.start(0.25)
+	await timer.timeout

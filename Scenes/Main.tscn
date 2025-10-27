@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnbsxpkb1u631"]
+[gd_scene load_steps=18 format=3 uid="uid://cnbsxpkb1u631"]
 
 [ext_resource type="Script" uid="uid://bve5qdqyhwaoi" path="res://Scripts/end_turno.gd" id="1_50glp"]
 [ext_resource type="Script" uid="uid://d0r6h0jng6q1u" path="res://Scripts/player_card_manager.gd" id="1_i0p2h"]
@@ -9,8 +9,10 @@
 [ext_resource type="Script" uid="uid://d3b74llnuyu2d" path="res://Scripts/player_input_manager.gd" id="5_pbw6q"]
 [ext_resource type="Script" uid="uid://b44yc6slvuve1" path="res://Scripts/magic_card_slot.gd" id="6_jw32o"]
 [ext_resource type="PackedScene" uid="uid://fgsnvc4ac4q2" path="res://Scenes/opponent_card_deck.tscn" id="6_v1gob"]
+[ext_resource type="Script" uid="uid://coi3mh1vrgia7" path="res://Scripts/player_table.gd" id="8_1p5hy"]
 [ext_resource type="Script" uid="uid://i5svuxu5opue" path="res://Scripts/battle_manager.gd" id="10_bmxlf"]
 [ext_resource type="Script" uid="uid://cxxkqsvhj8fnk" path="res://Scripts/opponent_card_deck.gd" id="11_grg3l"]
+[ext_resource type="Script" uid="uid://cwcgv3d4vgk2q" path="res://Scripts/opponent_table.gd" id="11_h1m7h"]
 [ext_resource type="Script" uid="uid://bvg3laj1dfhg5" path="res://Scripts/opponent_hand.gd" id="12_frkhe"]
 [ext_resource type="Script" uid="uid://dcsjk8fbb8g71" path="res://Scripts/opponent_ia.gd" id="13_frkhe"]
 
@@ -78,93 +80,97 @@ script = ExtResource("1_i0p2h")
 [node name="VisualManager" type="Node2D" parent="CardManager"]
 script = ExtResource("3_vy5pj")
 
+[node name="Timer" type="Timer" parent="CardManager/VisualManager"]
+
 [node name="PlayerHand" parent="." instance=ExtResource("4_31u2b")]
 
-[node name="CardDeck" parent="." instance=ExtResource("4_rgh2o")]
+[node name="PlayerCardDeck" parent="." instance=ExtResource("4_rgh2o")]
 z_index = -2
 position = Vector2(450, 975)
 
-[node name="Table" type="Node2D" parent="."]
+[node name="PlayerTable" type="Node2D" parent="."]
+script = ExtResource("8_1p5hy")
 
-[node name="Magic" type="Node" parent="Table"]
+[node name="Magics" type="Node" parent="PlayerTable"]
 
-[node name="CardSlot0" parent="Table/Magic" instance=ExtResource("3_wakut")]
+[node name="CardSlot0" parent="PlayerTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(736, 799)
 script = ExtResource("6_jw32o")
 
-[node name="CardSlot2" parent="Table/Magic" instance=ExtResource("3_wakut")]
+[node name="CardSlot2" parent="PlayerTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(886, 799)
 script = ExtResource("6_jw32o")
 
-[node name="CardSlot3" parent="Table/Magic" instance=ExtResource("3_wakut")]
+[node name="CardSlot3" parent="PlayerTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1036, 799)
 script = ExtResource("6_jw32o")
 
-[node name="CardSlot4" parent="Table/Magic" instance=ExtResource("3_wakut")]
+[node name="CardSlot4" parent="PlayerTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1186, 799)
 script = ExtResource("6_jw32o")
 
-[node name="Heros" type="Node" parent="Table"]
+[node name="Heroes" type="Node" parent="PlayerTable"]
 
-[node name="CardSlot5" parent="Table/Heros" instance=ExtResource("3_wakut")]
+[node name="CardSlot5" parent="PlayerTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(736, 624)
 
-[node name="CardSlot6" parent="Table/Heros" instance=ExtResource("3_wakut")]
+[node name="CardSlot6" parent="PlayerTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(886, 624)
 
-[node name="CardSlot7" parent="Table/Heros" instance=ExtResource("3_wakut")]
+[node name="CardSlot7" parent="PlayerTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1036, 624)
 
-[node name="CardSlot8" parent="Table/Heros" instance=ExtResource("3_wakut")]
+[node name="CardSlot8" parent="PlayerTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1186, 624)
 
 [node name="OpponentTable" type="Node2D" parent="."]
+script = ExtResource("11_h1m7h")
 
-[node name="Magic" type="Node" parent="OpponentTable"]
+[node name="Magics" type="Node" parent="OpponentTable"]
 
-[node name="CardOpSlot5" parent="OpponentTable/Magic" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot5" parent="OpponentTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(736, 272)
 script = ExtResource("6_jw32o")
 
-[node name="CardOpSlot6" parent="OpponentTable/Magic" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot6" parent="OpponentTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(886, 272)
 script = ExtResource("6_jw32o")
 
-[node name="CardOpSlot7" parent="OpponentTable/Magic" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot7" parent="OpponentTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1036, 272)
 script = ExtResource("6_jw32o")
 
-[node name="CardOpSlot8" parent="OpponentTable/Magic" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot8" parent="OpponentTable/Magics" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1186, 272)
 script = ExtResource("6_jw32o")
 
-[node name="Heros" type="Node" parent="OpponentTable"]
+[node name="Heroes" type="Node" parent="OpponentTable"]
 
-[node name="CardOpSlot0" parent="OpponentTable/Heros" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot0" parent="OpponentTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(736, 447)
 
-[node name="CardOpSlot2" parent="OpponentTable/Heros" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot2" parent="OpponentTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(886, 447)
 
-[node name="CardOPSlot3" parent="OpponentTable/Heros" instance=ExtResource("3_wakut")]
+[node name="CardOPSlot3" parent="OpponentTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1036, 447)
 
-[node name="CardOpSlot4" parent="OpponentTable/Heros" instance=ExtResource("3_wakut")]
+[node name="CardOpSlot4" parent="OpponentTable/Heroes" instance=ExtResource("3_wakut")]
 z_index = -2
 position = Vector2(1186, 447)
 

@@ -9,17 +9,16 @@ var card_being_dragged : Node2D
 var is_hovering_card : bool
 var player_monster_card_this_turn : bool
 
-var player_hand_ref : Node
-var card_deck_ref : Node
-var card_vci_ref : Node
+@onready var player_hand_ref : Node2D = $"../PlayerHand"
+@onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
+@onready var player_table_ref : Node2D = $"../PlayerTable"
+@onready var visual_manager: Node2D = $VisualManager
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	player_hand_ref = get_node("../PlayerHand")
-	card_deck_ref = get_node("../CardDeck")
-	card_vci_ref = preload("res://Scripts/visual_card_interaction.gd").new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void: 
@@ -80,15 +79,7 @@ func stop_drag():
 			if card_being_dragged.card_type == card_slot_found.card_slot_type:
 				if !player_monster_card_this_turn:
 					player_monster_card_this_turn = true
-					player_hand_ref.remove_card_from_hand(card_being_dragged)
-					card_being_dragged.z_index = -1
-					is_hovering_card = false
-					card_being_dragged.card_slot_card_is_in = card_slot_found
-					card_being_dragged.position = card_slot_found.position
-					card_being_dragged.get_node("Area2D").set_deferred("monitoring",false)
-					card_vci_ref.minimize_card(card_being_dragged)
-					card_slot_found.card_in_slot = true
-					card_being_dragged = null
+					add_card_to_table(card_being_dragged, card_slot_found)
 					return		
 		player_hand_ref.add_card_to_hand(card_being_dragged)
 		card_being_dragged.card_slot_card_is_in = null
@@ -98,8 +89,19 @@ func stop_drag():
 		player_hand_ref.update_hand_positions()
 
 
-
-
+# ======== Card Placement ======== #
+func add_card_to_table(card: Node2D, card_slot_found: Node2D):
+	player_hand_ref.remove_card_from_hand(card)
+	player_table_ref.add_card_to_table(card, card.card_type)
+	card.z_index = -1
+	is_hovering_card = false
+	card.card_slot_card_is_in = card_slot_found
+	card.position = card_slot_found.position
+	card.get_node("Area2D").set_deferred("monitoring",false)
+	visual_manager.minimize_card(card)
+	card_slot_found.card_in_slot = true
+	card_slot_found.card_in_slot_ref = card
+	card_being_dragged = null
 
 #======== TURN MANAGEMENT ========#
 
