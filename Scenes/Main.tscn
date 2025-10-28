@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnbsxpkb1u631"]
+[gd_scene load_steps=18 format=3 uid="uid://cnbsxpkb1u631"]
 
 [ext_resource type="Script" uid="uid://bve5qdqyhwaoi" path="res://Scripts/end_turno.gd" id="1_50glp"]
-[ext_resource type="Script" uid="uid://d0r6h0jng6q1u" path="res://Scripts/player_card_manager.gd" id="1_i0p2h"]
+[ext_resource type="Texture2D" uid="uid://wox50uao04gm" path="res://1_Free Pack/Generated Art/e47230bc0a274620c97ee2840e9f09b6.jpg" id="2_h1m7h"]
 [ext_resource type="Script" uid="uid://i5svuxu5opue" path="res://Scripts/turn_manager.gd" id="3_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://bhjvsqvu80cv3" path="res://Scenes/input_manager.tscn" id="3_frkhe"]
 [ext_resource type="Script" uid="uid://cimdsq3cl0dr1" path="res://Scripts/visual_card_interaction.gd" id="3_vy5pj"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bie86qndjcm40" path="res://Scenes/player__card_deck.tscn" id="4_rgh2o"]
 [ext_resource type="PackedScene" uid="uid://fgsnvc4ac4q2" path="res://Scenes/opponent_card_deck.tscn" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dq11ia4sprhgh" path="res://Scenes/player_table.tscn" id="8_1p5hy"]
+[ext_resource type="PackedScene" uid="uid://2g345r1lhedh" path="res://Scenes/player_card_manager.tscn" id="8_h1m7h"]
 [ext_resource type="PackedScene" uid="uid://dlypctmtyl3pk" path="res://Scenes/opponent_table.tscn" id="9_h1m7h"]
 [ext_resource type="Script" uid="uid://wuof2sggb1on" path="res://Scripts/battle_manager.gd" id="10_bmxlf"]
 [ext_resource type="Script" uid="uid://cxxkqsvhj8fnk" path="res://Scripts/opponent_card_deck.gd" id="11_grg3l"]
@@ -43,7 +44,7 @@ offset_right = 1574.0
 offset_bottom = 782.0
 theme_override_fonts/font = SubResource("SystemFont_pbw6q")
 theme_override_font_sizes/font_size = 64
-text = "PASS 
+text = "END
 TURN"
 script = ExtResource("1_50glp")
 
@@ -63,6 +64,47 @@ scroll_active = false
 tab_size = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TurnName" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 1320.0
+offset_top = 840.0
+offset_right = 1802.0
+offset_bottom = 985.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/normal_font = SubResource("SystemFont_vy5pj")
+theme_override_font_sizes/normal_font_size = 64
+text = "player preparation"
+scroll_active = false
+tab_size = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="background1" type="Sprite2D" parent="Control"]
+z_index = -5
+position = Vector2(504, 336)
+rotation = 1.5707964
+texture = ExtResource("2_h1m7h")
+
+[node name="background2" type="Sprite2D" parent="Control"]
+z_index = -5
+position = Vector2(504, 1016)
+rotation = 1.5707964
+texture = ExtResource("2_h1m7h")
+
+[node name="background3" type="Sprite2D" parent="Control"]
+z_index = -5
+position = Vector2(1520, 1016)
+rotation = 1.5707964
+texture = ExtResource("2_h1m7h")
+
+[node name="background4" type="Sprite2D" parent="Control"]
+z_index = -5
+position = Vector2(1520, 336)
+rotation = 1.5707964
+texture = ExtResource("2_h1m7h")
 
 [node name="BattleManager" type="Node" parent="."]
 script = ExtResource("10_bmxlf")
@@ -84,8 +126,7 @@ script = ExtResource("3_vy5pj")
 
 [node name="OpponentCardManager" type="Node2D" parent="."]
 
-[node name="PlayerCardManager" type="Node2D" parent="."]
-script = ExtResource("1_i0p2h")
+[node name="PlayerCardManager" parent="." instance=ExtResource("8_h1m7h")]
 
 [node name="PlayerHand" parent="." instance=ExtResource("4_31u2b")]
 

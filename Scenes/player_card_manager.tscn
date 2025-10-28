@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2g345r1lhedh"]
+
+[ext_resource type="Script" uid="uid://d0r6h0jng6q1u" path="res://Scripts/player_card_manager.gd" id="1_1udsu"]
+
+[node name="PlayerCardManager" type="Node2D"]
+script = ExtResource("1_1udsu")
+
+[node name="Timer" type="Timer" parent="."]

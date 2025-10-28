@@ -3,6 +3,7 @@ extends Node2D
 @onready var attack_label: RichTextLabel = $Control/Attack
 @onready var health_label: RichTextLabel = $Control/Health
 @onready var mana_cost_label: RichTextLabel = $Control/ManaCost
+@onready var area_2d: Area2D = $Area2D
 
 var start_position : Vector2
 var card_slot_card_is_in : Node

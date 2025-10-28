@@ -13,3 +13,4 @@ func _on_pressed() -> void:
 	card_manager.end_turn()
 	turn_number += 1
 	turn_number_label.text = str(turn_number)
+	
