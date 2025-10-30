@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var card_gravy_yard: Node2D = $"../../CardGravyYard"
 @onready var attack_label: RichTextLabel = $Control/Attack
 @onready var health_label: RichTextLabel = $Control/Health
 @onready var mana_cost_label: RichTextLabel = $Control/ManaCost
@@ -46,8 +47,12 @@ func set_health(add : float, mult : float, type : String) -> void:
 	elif type == "mult":
 		temp_health *= mult
 	update_info()
+	if temp_health < 0:
+		dead_of_card()
 	
 func update_info() -> void:
-	print("opponent_atualização")
 	attack_label.text = str(int(temp_attack))
 	health_label.text = str(int(temp_health))
+
+func dead_of_card():
+	card_gravy_yard.add_card_to_gravy_yard(self)

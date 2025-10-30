@@ -22,6 +22,18 @@ window/size/viewport_height=1080
 window/size/mode=3
 window/vsync/vsync_mode=0
 
+[layer_names]
+
+2d_physics/layer_1="Card_Player_in_Hand"
+2d_physics/layer_2="Card_Player_in_Slot"
+2d_physics/layer_3="Card_Slot"
+2d_physics/layer_4="Deck"
+2d_physics/layer_5="Card_Opponent_In_Hand"
+2d_physics/layer_6="Card_Opponent_in_Slot"
+2d_physics/layer_7="Card_Opponent_Slot"
+2d_physics/layer_8="Player_gravy_yard"
+2d_physics/layer_9="Opponent_gravy_yard"
+
 [rendering]
 
 renderer/rendering_method="mobile"

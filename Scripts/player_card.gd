@@ -4,6 +4,8 @@ extends Node2D
 signal mouse_entered_card
 signal mouse_exited_card
 
+@onready var select_to_attack: CPUParticles2D = $select_to_attack
+@onready var card_gravy_yard: Node2D = $"../../CardGravyYard"
 @onready var visual_manager: Node2D = $"../../VisualManager"
 @onready var attack_label: RichTextLabel = $Control/Attack
 @onready var health_label: RichTextLabel = $Control/Health
@@ -50,10 +52,15 @@ func set_health(add : float, mult : float, type : String) -> void:
 	elif type == "mult":
 		temp_health *= mult
 	update_info()
+	if temp_health <= 0:
+		dead_of_card()
 	
 func update_info() -> void:
 	attack_label.text = str(int(temp_attack))
 	health_label.text = str(int(temp_health))
+	
+func dead_of_card():
+	card_gravy_yard.add_card_to_gravy_yard(self)
 	
 func _ready() -> void:
 	visual_manager.connect_card_signals(self)

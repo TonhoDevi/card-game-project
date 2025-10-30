@@ -3,9 +3,11 @@ extends Node2D
 @onready var player_hand_ref : Node2D = $"../PlayerHand"
 @onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
 @onready var player_table_ref : Node2D = $"../PlayerTable"
-@onready var visual_manager: Node2D = $"../VisualManager"
-@onready var battle_manager: Node = $"../BattleManager"
-@onready var input_manager: Node2D = $"../InputManager"
+@onready var visual_manager_ref: Node2D = $"../VisualManager"
+@onready var battle_manager_ref: Node = $"../BattleManager"
+@onready var input_manager_ref: Node2D = $"../InputManager"
+@onready var turn_manager_ref: Node = $"../TurnManager"
+
 @onready var timer: Timer = $Timer
 
 const COLLISION_MAKS_CARD : int = 1
@@ -31,15 +33,7 @@ func _process(_delta: float) -> void:
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x,0,screen_size.x),clamp(mouse_pos.y,0,screen_size.y))
 
 # ======== Dragging HELPERS ======== #	
-func raycast_check_for_card():
-	var space_state = get_world_2d().direct_space_state
-	var parametres = PhysicsPointQueryParameters2D.new()
-	parametres.position = get_global_mouse_position()
-	parametres.collide_with_areas = true
-	parametres.collision_mask = COLLISION_MAKS_CARD
-	var result = space_state.intersect_point(parametres)
-	if result.size() > 0:
-		card_being_dragged = get_card_with_highest_z_index(result)
+
 
 func raycast_check_for_card_slot():
 	var space_state = get_world_2d().direct_space_state
@@ -66,17 +60,19 @@ func get_card_with_highest_z_index(cards : Array) -> Node2D:
 func start_drag(card : Node2D):
 	card_being_dragged = card
 	# Detectar se a carta ja estava em um slot
-	if card_being_dragged.get_node("Area2D").monitoring == false:
-		var card_slot = raycast_check_for_card_slot()
+	if !card_being_dragged.card_slot_card_is_in:
+		var result = input_manager_ref.ray_cast_at_cursor()
+		var card_slot = input_manager_ref.find_card_slot(result)
 		if card_slot:
 			card_slot.card_in_slot = false
-		card_being_dragged.get_node("Area2D").set_deferred("monitoring",true)
+		card_being_dragged.card_slot_card_is_in = null
 	
 # Stop dragging the card 
 func stop_drag():
 	if card_being_dragged:
-		var card_slot_found : Node2D = raycast_check_for_card_slot()
-		if card_slot_found and not card_slot_found.card_in_slot:
+		var result = input_manager_ref.ray_cast_at_cursor()
+		var card_slot_found = input_manager_ref.find_card_slot(result)
+		if card_slot_found and not card_slot_found.card_in_slot and turn_manager_ref.user_turn == "Player preparation turn" and !have_place_monster_card_this_turn:
 			if card_being_dragged.card_type == card_slot_found.card_slot_type:
 				if !have_place_monster_card_this_turn:
 					have_place_monster_card_this_turn = true
@@ -84,7 +80,6 @@ func stop_drag():
 					return		
 		player_hand_ref.add_card_to_hand(card_being_dragged)
 		card_being_dragged.card_slot_card_is_in = null
-		card_being_dragged.get_node("Area2D").set_deferred("monitoring",true)
 		card_being_dragged.z_index = 0
 		card_being_dragged = null
 		player_hand_ref.update_hand_positions()
@@ -100,17 +95,20 @@ func chose_card(card : Node2D) -> void:
 			else:
 				card_being_select = card
 
-func enemy_target(card : Node2D) -> void:
+func opponent_target(card : Node2D) -> void:
 	if card_being_select != null:
 		have_attack_card_this_turn = true
-		battle_manager.attack(card,card_being_select, "add")
-		input_manager.can_click = false
+		perform_attack(card_being_select,card)
+		input_manager_ref.can_click = false
 		card_being_select = null
 		timer.start(0.8)
 		await  timer.timeout
-		input_manager.can_click = true
+		input_manager_ref.can_click = true
 
-
+func perform_attack(player_card : Node2D, opponent_card : Node2D) -> void:
+	visual_manager_ref.animate_card_attack(player_card, opponent_card.position)
+	battle_manager_ref.attack(player_card, opponent_card, "add")
+	
 
 # ======== Card Placement ======== #
 func add_card_to_table(card: Node2D, card_slot_found: Node2D):
@@ -119,8 +117,7 @@ func add_card_to_table(card: Node2D, card_slot_found: Node2D):
 	card.z_index = -1
 	card.card_slot_card_is_in = card_slot_found
 	card.position = card_slot_found.position
-	card.get_node("Area2D").set_deferred("monitoring",false)
-	visual_manager.minimize_card(card)
+	visual_manager_ref.minimize_card(card)
 	card_slot_found.card_in_slot = true
 	card_slot_found.card_in_slot_ref = card
 	card_being_dragged = null
@@ -130,5 +127,4 @@ func add_card_to_table(card: Node2D, card_slot_found: Node2D):
 func end_turn():
 	have_place_monster_card_this_turn = false
 	have_attack_card_this_turn = false
-
 	card_deck_ref.have_drawed_card = false

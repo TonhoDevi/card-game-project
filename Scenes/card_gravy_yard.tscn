@@ -1,32 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bie86qndjcm40"]
+[gd_scene load_steps=5 format=3 uid="uid://crujkb4m0io5u"]
 
-[ext_resource type="Script" uid="uid://bs3bl44xxgqu3" path="res://Scripts/player_card_deck.gd" id="1_io7pv"]
-[ext_resource type="Texture2D" uid="uid://dwwhuhyepdgmw" path="res://1_Free Pack/Card Sprites/Card Back/_cover.png" id="1_ukesx"]
+[ext_resource type="Script" uid="uid://ce7yojl0yqfcs" path="res://Scripts/card_gravy_yard.gd" id="1_qvohv"]
+[ext_resource type="Texture2D" uid="uid://7ghcklnk8btv" path="res://1_Free Pack/Card Sprites/Card Back/neutral emblem (4).png" id="2_0p2e3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07yfr"]
 size = Vector2(144, 192)
 
-[sub_resource type="SystemFont" id="SystemFont_io7pv"]
+[sub_resource type="SystemFont" id="SystemFont_vc1r0"]
 font_names = PackedStringArray("OCR A")
 subpixel_positioning = 0
 multichannel_signed_distance_field = true
 msdf_pixel_range = 64
 msdf_size = 64
 
-[node name="CardDeck" type="Node2D"]
-scale = Vector2(0.65, 0.65)
-script = ExtResource("1_io7pv")
+[node name="CardGravyYard" type="Node2D"]
+script = ExtResource("1_qvohv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.18, 0.18)
-texture = ExtResource("1_ukesx")
+texture = ExtResource("2_0p2e3")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
-collision_mask = 8
+collision_layer = 64
+collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_kln2b")
+shape = SubResource("RectangleShape2D_07yfr")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -47,10 +46,12 @@ anchor_bottom = -1.2
 offset_right = 1.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = SubResource("SystemFont_io7pv")
+theme_override_fonts/normal_font = SubResource("SystemFont_vc1r0")
 theme_override_font_sizes/normal_font_size = 64
 text = "0"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]

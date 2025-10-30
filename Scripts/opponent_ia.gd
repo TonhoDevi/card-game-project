@@ -19,17 +19,18 @@ func start_preparation_turn() -> void:
 	timer.start(wait_time_between_actions)
 	await timer.timeout
 	# Check for free slots to play
-	if get_free_hero_slot():
+	var hero_slot = get_free_hero_slot()
+	var magic_slot = get_free_magic_slot()
+	
+	if hero_slot:
 		# Play a hero card
 		var hero_card = opponent_hand_ref.get_random_hero_card()
-		var hero_slot = get_free_hero_slot()
 		if hero_card and hero_slot:
 			play_hero_card(hero_card, hero_slot)
-
-	elif get_free_magic_slot():
+	
+	elif magic_slot:
 		# Play a magic card
 		var magic_card = opponent_hand_ref.get_random_magic_card()
-		var magic_slot = get_free_magic_slot()
 		if magic_card and magic_slot:
 			play_magic_card(magic_card, magic_slot)
 	# End turn
@@ -61,6 +62,7 @@ func start_combat_turn() -> void:
 	end_combat_turn()
 
 func end_combat_turn() -> void:
+	print("acabou de atacar")
 	turn_manager_ref.end_opponent_combat_turn()
 
 	
@@ -90,6 +92,7 @@ func play_magic_card(card_node: Node2D, slot_node: Node2D) -> void:
 	slot_node.card_in_slot = true
 	slot_node.card_in_slot_ref = card_node
 	card_node.card_slot_card_is_in = slot_node
+	card_node.get_node("Area2D").collision_mask = 64
 	card_node.get_node("AnimationPlayer").play("card_flip")
 	opponent_hand_ref.animate_card_to_position(card_node, slot_node.position)
 	visual_manager.minimize_card(card_node)
@@ -99,6 +102,7 @@ func play_hero_card(card_node: Node2D, slot_node: Node2D) -> void:
 	slot_node.card_in_slot = true
 	slot_node.card_in_slot_ref = card_node
 	card_node.card_slot_card_is_in = slot_node
+	card_node.get_node("Area2D").collision_mask = 64
 	card_node.get_node("AnimationPlayer").play("card_flip")
 	opponent_hand_ref.animate_card_to_position(card_node, slot_node.position)
 	visual_manager.minimize_card(card_node)

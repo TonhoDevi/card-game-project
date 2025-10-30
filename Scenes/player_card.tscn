@@ -1,9 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfr0th4nvohqj"]
+[gd_scene load_steps=12 format=3 uid="uid://dfr0th4nvohqj"]
 
 [ext_resource type="Script" uid="uid://cbxcwavqwvr35" path="res://Scripts/player_card.gd" id="1_7xeok"]
 [ext_resource type="Texture2D" uid="uid://ca82timrodrkb" path="res://1_Free Pack/Card Sprites/_Card Back Elements/big decor (8).png" id="1_dwopy"]
 [ext_resource type="Texture2D" uid="uid://rij7fhm7taf1" path="res://Assets/Cards/Ranbara.webp" id="3_brehn"]
 [ext_resource type="Texture2D" uid="uid://dwwhuhyepdgmw" path="res://1_Free Pack/Card Sprites/Card Back/_cover.png" id="4_eumee"]
+
+[sub_resource type="Gradient" id="Gradient_nktp6"]
+colors = PackedColorArray(1, 1, 1, 1, 0.9804042, 0.13816993, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ov7r2"]
+gradient = SubResource("Gradient_nktp6")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0.9579439, 0.018691588)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwopy"]
 size = Vector2(128, 176)
@@ -200,6 +208,23 @@ _data = {
 [node name="Card" type="Node2D"]
 scale = Vector2(0.85, 0.85)
 script = ExtResource("1_7xeok")
+
+[node name="select_to_attack" type="CPUParticles2D" parent="."]
+scale = Vector2(1.0000001, 1.0000001)
+emitting = false
+amount = 128
+texture = SubResource("GradientTexture2D_ov7r2")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 250.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.1
+scale_amount_max = 0.1
 
 [node name="Body" type="Sprite2D" parent="."]
 scale = Vector2(0.2, 0.2)

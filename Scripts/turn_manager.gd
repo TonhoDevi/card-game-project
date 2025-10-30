@@ -9,7 +9,7 @@ extends Node
 @onready var opponent_ia_ref: Node2D = $"../OpponentIA"
 @export var wait_time: float = 1.0
 @onready var game_phase: String = "preparation_phase"
-
+@onready var user_turn : String = "Player preparation turn"
 
 # Called when the node enters the scene tree for the first time.
 
@@ -36,16 +36,19 @@ func end_opponent_preparation_turn() -> void:
 	
 func start_opponent_combat_turn():
 	define_visual_turn("Opponent combat turn", false)
+	turn_timer_ref.start(wait_time)
+	await turn_timer_ref.timeout
 	opponent_ia_ref.start_combat_turn()
 
 func end_opponent_combat_turn() -> void:
 	input_manager_ref.change_game_phase("preparation_phase")
-	end_turn_active_button(true)
+	turn_timer_ref.start(wait_time)
+	await turn_timer_ref.timeout
 	start_player_preparation_turn()
 
 func start_player_preparation_turn():
+	end_turn_active_button(true)
 	define_visual_turn("Player preparation turn", true)
-	pass
 	
 func end_player_preparation_turn():
 	pass
@@ -64,6 +67,7 @@ func end_turn_active_button(trigger : bool) -> void :
 	end_turno_ref.visible = trigger
 
 func define_visual_turn(description : String, trigger: bool) -> void :
+	user_turn = description
 	turn_name.text = description
 	if trigger:
 		turn_name.self_modulate = Color.WHITE

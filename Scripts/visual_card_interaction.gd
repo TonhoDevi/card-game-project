@@ -37,6 +37,7 @@ func minimize_card(card):
 
 # Helper function to animate card attack
 func animate_card_attack(card: Node2D, target_position: Vector2) -> void:
+	card.z_index = 8
 	var tween : Tween = get_tree().create_tween()
 	var original_position : Vector2 = card.position
 	var attack_position : Vector2 = target_position
@@ -47,3 +48,8 @@ func animate_card_attack(card: Node2D, target_position: Vector2) -> void:
 	tween2.tween_property(card, "position", original_position, 0.25)
 	timer.start(0.25)
 	await timer.timeout
+	card.z_index = 0
+
+
+func car_select(card : Node2D) -> void:
+	card.emit_particles()

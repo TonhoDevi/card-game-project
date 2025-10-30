@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq11ia4sprhgh"]
+[gd_scene load_steps=3 format=3 uid="uid://dq11ia4sprhgh"]
 
 [ext_resource type="Script" uid="uid://coi3mh1vrgia7" path="res://Scripts/player_table.gd" id="1_lmtap"]
 [ext_resource type="PackedScene" uid="uid://ddbwng6uplhtj" path="res://Scenes/player_card_slot.tscn" id="2_2jqcc"]
-[ext_resource type="Script" uid="uid://b44yc6slvuve1" path="res://Scripts/magic_card_slot.gd" id="3_5vo3x"]
 
 [node name="PlayerTable" type="Node2D"]
 script = ExtResource("1_lmtap")
@@ -12,22 +11,22 @@ script = ExtResource("1_lmtap")
 [node name="CardSlot0" parent="Magics" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(736, 799)
-script = ExtResource("3_5vo3x")
+card_slot_type = "Magic"
 
 [node name="CardSlot2" parent="Magics" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(886, 799)
-script = ExtResource("3_5vo3x")
+card_slot_type = "Magic"
 
 [node name="CardSlot3" parent="Magics" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(1036, 799)
-script = ExtResource("3_5vo3x")
+card_slot_type = "Magic"
 
 [node name="CardSlot4" parent="Magics" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(1186, 799)
-script = ExtResource("3_5vo3x")
+card_slot_type = "Magic"
 
 [node name="Heroes" type="Node" parent="."]
 

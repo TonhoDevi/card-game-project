@@ -12,6 +12,7 @@ func _ready() -> void:
 func add_card_to_hand(card: Node2D):
 	if card not in player_hand:
 		player_hand.insert(0,card)
+		card.get_node("Area2D").collision_mask = 1
 		update_hand_positions()
 	else:
 		animate_card_to_position(card, card.start_position)
