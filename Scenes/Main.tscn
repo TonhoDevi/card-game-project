@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cnbsxpkb1u631"]
+[gd_scene load_steps=21 format=3 uid="uid://cnbsxpkb1u631"]
 
 [ext_resource type="Script" uid="uid://bve5qdqyhwaoi" path="res://Scripts/end_turno.gd" id="1_50glp"]
 [ext_resource type="Texture2D" uid="uid://wox50uao04gm" path="res://1_Free Pack/Generated Art/e47230bc0a274620c97ee2840e9f09b6.jpg" id="2_h1m7h"]
-[ext_resource type="Script" uid="uid://dccyrpwmfspay" path="res://Scripts/mana_manager.gd" id="3_0sclb"]
 [ext_resource type="Script" uid="uid://i5svuxu5opue" path="res://Scripts/turn_manager.gd" id="3_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://bhjvsqvu80cv3" path="res://Scenes/input_manager.tscn" id="3_frkhe"]
 [ext_resource type="Script" uid="uid://cimdsq3cl0dr1" path="res://Scripts/visual_card_interaction.gd" id="3_vy5pj"]
@@ -147,9 +146,6 @@ position = Vector2(1520, 336)
 rotation = 1.5707964
 texture = ExtResource("2_h1m7h")
 
-[node name="ManaManager" type="Node" parent="."]
-script = ExtResource("3_0sclb")
-
 [node name="BattleManager" type="Node" parent="."]
 script = ExtResource("10_bmxlf")
 
@@ -167,7 +163,7 @@ script = ExtResource("3_vy5pj")
 [node name="Timer" type="Timer" parent="VisualManager"]
 
 [node name="OpponentCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
-position = Vector2(472, 352)
+position = Vector2(1472, 672)
 
 [node name="PlayerCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
 position = Vector2(472, 352)

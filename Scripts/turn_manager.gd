@@ -1,5 +1,6 @@
 extends Node
 
+
 @onready var turn_name: RichTextLabel = $"../Control/TurnName"
 @onready var end_turno_ref: Button = $"../Control/EndTurno"
 @onready var turn_timer_ref: Timer = $"TurnTimer"
@@ -7,6 +8,9 @@ extends Node
 @onready var input_manager_ref: Node2D = $"../InputManager"
 @onready var opponent_hand_ref: Node2D = $"../OpponentHand"
 @onready var opponent_ia_ref: Node2D = $"../OpponentIA"
+@onready var opponent_mana_ref: Node2D = $"../OpponentMana"
+@onready var player_mana_ref: Node2D = $"../PlayerMana"
+
 @export var wait_time: float = 1.0
 @onready var game_phase: String = "preparation_phase"
 @onready var user_turn : String = "Player preparation turn"
@@ -22,8 +26,12 @@ func _on_end_turno_pressed() -> void:
 		start_opponent_combat_turn()
 		game_phase =  "preparation_phase"
 		end_turn_active_button(false)
+	elif game_phase == "start_phase":
+		start_player_preparation_turn()
+		game_phase =  "preparation_phase"
 	
 func start_opponent_preparation_turn() -> void:
+	opponent_mana_ref.gain_mana("D6")
 	define_visual_turn("Opponent preparation turn", false)
 	turn_timer_ref.start(wait_time)
 	await turn_timer_ref.timeout
@@ -47,6 +55,7 @@ func end_opponent_combat_turn() -> void:
 	start_player_preparation_turn()
 
 func start_player_preparation_turn():
+	player_mana_ref.gain_mana("D6")
 	end_turn_active_button(true)
 	define_visual_turn("Player preparation turn", true)
 	

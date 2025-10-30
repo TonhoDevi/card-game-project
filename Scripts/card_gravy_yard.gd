@@ -1,10 +1,9 @@
 extends Node2D
 
 @onready var timer: Timer = $Timer
-@onready var player_hand: Node2D = $"../PlayerHand"
+@onready var opponent_hand: Node2D = $"../OpponentHand"
 const CARD_DRAW_SPEED : float = 1.0
 var gravy_yard : Array = []
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 
@@ -25,7 +24,7 @@ func add_card_to_gravy_yard(card: Node2D):
 func remove_card_from_gravy_hard_to_hand(card: Node2D):
 	if card in gravy_yard:
 		gravy_yard.erase(card)
-		player_hand.add_card_to_hand(card)
+		opponent_hand.add_card_to_hand(card)
 
 
 

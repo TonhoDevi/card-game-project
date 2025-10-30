@@ -6,6 +6,7 @@ extends Node2D
 @onready var player_table_ref: Node2D = $"../PlayerTable"
 @onready var visual_manager: Node2D = $"../VisualManager"
 @onready var battle_manager: Node = $"../BattleManager"
+@onready var opponent_mana: Node2D = $"../OpponentMana"
 
 
 @onready var timer: Timer = $"Timer"

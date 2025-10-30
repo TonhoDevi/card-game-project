@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var player_mana_ref: Node2D = $"../PlayerMana"
 @onready var player_hand_ref : Node2D = $"../PlayerHand"
 @onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
 @onready var player_table_ref : Node2D = $"../PlayerTable"
@@ -74,7 +75,7 @@ func stop_drag():
 		var card_slot_found = input_manager_ref.find_card_slot(result)
 		if card_slot_found and not card_slot_found.card_in_slot and turn_manager_ref.user_turn == "Player preparation turn" and !have_place_monster_card_this_turn:
 			if card_being_dragged.card_type == card_slot_found.card_slot_type:
-				if !have_place_monster_card_this_turn:
+				if !have_place_monster_card_this_turn and player_mana_ref.use_mana(card_being_dragged.get_mana()):
 					have_place_monster_card_this_turn = true
 					add_card_to_table(card_being_dragged, card_slot_found)
 					return		

@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var opponent_mana: Node2D = $"../OpponentMana"
 const HAND_Y_POSITION : int = 100
 const CARD_WIDTH : int = 150
 const CARD_DRAW_SPEED : float = 0.7
@@ -36,7 +37,7 @@ func update_hand_positions():
 func get_random_hero_card() -> Node2D:
 	var hero_cards : Array = []
 	for card in opponent_hand:
-		if card.card_type == "Hero":
+		if card.card_type == "Hero" and opponent_mana.use_mana(card.temp_mana):
 			hero_cards.append(card)
 	if hero_cards.size() == 0:
 		return null
@@ -46,7 +47,7 @@ func get_random_hero_card() -> Node2D:
 func get_random_magic_card() -> Node2D:
 	var magic_cards : Array = []
 	for card in opponent_hand:
-		if card.card_type == "Magic":
+		if card.card_type == "Magic" and opponent_mana.use_mana(card.temp_mana):
 			magic_cards.append(card)
 	if magic_cards.size() == 0:
 		return null

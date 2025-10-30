@@ -55,8 +55,6 @@ func create_card(card_drawn_name : String)->void:
 	var card_ref = add_card(new_card)
 	var card_image_path : String = "res://Assets/Cards/" + card_drawn_name + ".webp"
 	
-	card_ref.set_power(card_data_ref.CARD_DATA[card_drawn_name][0], card_data_ref.CARD_DATA[card_drawn_name][1])
-
-	card_ref.get_node("Control/ManaCost").text = str(card_data_ref.CARD_DATA[card_drawn_name][2])
+	card_ref.set_power(card_data_ref.CARD_DATA[card_drawn_name][0], card_data_ref.CARD_DATA[card_drawn_name][1], card_data_ref.CARD_DATA[card_drawn_name][2])
 	card_ref.card_type = card_data_ref.CARD_DATA[card_drawn_name][3]
 	card_ref.get_node("CardImage").texture = load(card_image_path)

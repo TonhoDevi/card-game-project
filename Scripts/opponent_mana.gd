@@ -18,8 +18,9 @@ func add_mana(amount : int) -> void:
 	update_visual()
 
 func gain_mana(dado : String) -> void:
-	var num : int = int(randf_range(0, DADOS[dado][0]))
+	var num : int = int(randf_range(1.0, float(DADOS[dado])))
 	opponent_mana_pool += num
+	update_visual()
 	
 
 func use_mana(amount : int) -> bool:
