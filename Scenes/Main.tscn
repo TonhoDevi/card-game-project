@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cnbsxpkb1u631"]
+[gd_scene load_steps=22 format=3 uid="uid://cnbsxpkb1u631"]
 
 [ext_resource type="Script" uid="uid://bve5qdqyhwaoi" path="res://Scripts/end_turno.gd" id="1_50glp"]
 [ext_resource type="Texture2D" uid="uid://wox50uao04gm" path="res://1_Free Pack/Generated Art/e47230bc0a274620c97ee2840e9f09b6.jpg" id="2_h1m7h"]
@@ -7,14 +7,15 @@
 [ext_resource type="Script" uid="uid://cimdsq3cl0dr1" path="res://Scripts/visual_card_interaction.gd" id="3_vy5pj"]
 [ext_resource type="PackedScene" uid="uid://bmo7nf5hrx20k" path="res://Scenes/player_hand.tscn" id="4_31u2b"]
 [ext_resource type="PackedScene" uid="uid://bie86qndjcm40" path="res://Scenes/player__card_deck.tscn" id="4_rgh2o"]
-[ext_resource type="Script" uid="uid://dxf8mc6g1qlrn" path="res://Scripts/player_mana.gd" id="4_sxkr1"]
-[ext_resource type="Script" uid="uid://cdmotse6l6t4n" path="res://Scripts/opponent_mana.gd" id="5_fq0cl"]
 [ext_resource type="PackedScene" uid="uid://fgsnvc4ac4q2" path="res://Scenes/opponent_card_deck.tscn" id="6_v1gob"]
 [ext_resource type="PackedScene" uid="uid://dq11ia4sprhgh" path="res://Scenes/player_table.tscn" id="8_1p5hy"]
 [ext_resource type="PackedScene" uid="uid://2g345r1lhedh" path="res://Scenes/player_card_manager.tscn" id="8_h1m7h"]
+[ext_resource type="Script" uid="uid://b1n3jhhalvlvp" path="res://Scripts/opponent_card_gravy_yard.gd" id="9_0sclb"]
 [ext_resource type="PackedScene" uid="uid://dlypctmtyl3pk" path="res://Scenes/opponent_table.tscn" id="9_h1m7h"]
+[ext_resource type="PackedScene" uid="uid://crfypte5u0y6d" path="res://Scenes/opponent_mana.tscn" id="10_0sclb"]
 [ext_resource type="Script" uid="uid://wuof2sggb1on" path="res://Scripts/battle_manager.gd" id="10_bmxlf"]
 [ext_resource type="Script" uid="uid://cxxkqsvhj8fnk" path="res://Scripts/opponent_card_deck.gd" id="11_grg3l"]
+[ext_resource type="PackedScene" uid="uid://dokd2cn8es4yp" path="res://Scenes/player_mana.tscn" id="11_sxkr1"]
 [ext_resource type="PackedScene" uid="uid://ce0aloxnwn60p" path="res://Scenes/opponent_hand.tscn" id="12_erwvk"]
 [ext_resource type="PackedScene" uid="uid://brprmg48a660e" path="res://Scenes/opponent_ia.tscn" id="13_2w5on"]
 [ext_resource type="PackedScene" uid="uid://crujkb4m0io5u" path="res://Scenes/card_gravy_yard.tscn" id="16_erwvk"]
@@ -87,41 +88,6 @@ tab_size = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerManaNum" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 208.0
-offset_top = 608.0
-offset_right = 690.0
-offset_bottom = 753.0
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/normal_font = SubResource("SystemFont_vy5pj")
-theme_override_font_sizes/normal_font_size = 64
-text = "Mana
-0"
-scroll_active = false
-tab_size = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="OpponentManaNum" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 1256.0
-offset_top = 280.0
-offset_right = 1738.0
-offset_bottom = 425.0
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 8
-theme_override_fonts/normal_font = SubResource("SystemFont_vy5pj")
-theme_override_font_sizes/normal_font_size = 64
-text = "player preparation"
-scroll_active = false
-tab_size = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="background1" type="Sprite2D" parent="Control"]
 z_index = -5
 position = Vector2(504, 336)
@@ -163,16 +129,18 @@ script = ExtResource("3_vy5pj")
 [node name="Timer" type="Timer" parent="VisualManager"]
 
 [node name="OpponentCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
-position = Vector2(1472, 672)
+position = Vector2(1248, 712)
+script = ExtResource("9_0sclb")
 
 [node name="PlayerCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
-position = Vector2(472, 352)
+position = Vector2(670, 360)
 
-[node name="OpponentMana" type="Node2D" parent="."]
-script = ExtResource("5_fq0cl")
+[node name="OpponentMana" parent="." instance=ExtResource("10_0sclb")]
+position = Vector2(1240, 480)
+rotation = 3.1415927
 
-[node name="PlayerMana" type="Node2D" parent="."]
-script = ExtResource("4_sxkr1")
+[node name="PlayerMana" parent="." instance=ExtResource("11_sxkr1")]
+position = Vector2(680, 584)
 
 [node name="OpponentCardManager" type="Node2D" parent="."]
 

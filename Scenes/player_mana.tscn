@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3 uid="uid://dokd2cn8es4yp"]
+
+[ext_resource type="Script" uid="uid://dxf8mc6g1qlrn" path="res://Scripts/player_mana.gd" id="1_tgv6m"]
+[ext_resource type="Texture2D" uid="uid://cl4rwtjd44icc" path="res://1_Free Pack/Card Sprites/_Card Back Elements/small decor (5).png" id="2_4l4vb"]
+[ext_resource type="Texture2D" uid="uid://buekxii7y7qwr" path="res://1_Free Pack/Card Sprites/_Card Back Elements/key crystal (6).png" id="3_lkd3w"]
+
+[node name="PlayerMana" type="Node2D"]
+script = ExtResource("1_tgv6m")
+
+[node name="gem_back1" type="Sprite2D" parent="."]
+position = Vector2(-32, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back1"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back2" type="Sprite2D" parent="."]
+position = Vector2(-31.599998, 64.4)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back2"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back3" type="Sprite2D" parent="."]
+position = Vector2(-31.599998, 128.4)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back3"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back4" type="Sprite2D" parent="."]
+position = Vector2(-31.599998, 192.40001)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back4"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back5" type="Sprite2D" parent="."]
+position = Vector2(-32, 255.99998)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back5"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back6" type="Sprite2D" parent="."]
+position = Vector2(32, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back6"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back7" type="Sprite2D" parent="."]
+position = Vector2(32.4, 64.4)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back7"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back8" type="Sprite2D" parent="."]
+position = Vector2(32.4, 128.4)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back8"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back9" type="Sprite2D" parent="."]
+position = Vector2(32.4, 192.40001)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back9"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")
+
+[node name="gem_back10" type="Sprite2D" parent="."]
+position = Vector2(32, 255.99998)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_4l4vb")
+
+[node name="gem" type="Sprite2D" parent="gem_back10"]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("3_lkd3w")

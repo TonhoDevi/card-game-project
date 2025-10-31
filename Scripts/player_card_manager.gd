@@ -18,7 +18,6 @@ var screen_size : Vector2
 var card_being_dragged : Node2D
 var card_being_select : Node2D
 
-var have_place_monster_card_this_turn : bool = false
 var have_attack_card_this_turn : bool = false
 
 
@@ -35,29 +34,6 @@ func _process(_delta: float) -> void:
 
 # ======== Dragging HELPERS ======== #	
 
-
-func raycast_check_for_card_slot():
-	var space_state = get_world_2d().direct_space_state
-	var parametres = PhysicsPointQueryParameters2D.new()
-	parametres.position = get_global_mouse_position()
-	parametres.collide_with_areas = true
-	parametres.collision_mask = COLLISION_MAKS_CARD_SLOT
-	var result = space_state.intersect_point(parametres)
-	if result.size() > 0:
-		return result[0].collider.get_parent()
-	else:
-		return null
-
-func get_card_with_highest_z_index(cards : Array) -> Node2D:
-	var highest_z_card : Node2D = cards[0].collider.get_parent()
-	var highest_z_index : int = highest_z_card.z_index
-	for card in cards:
-		var current_card : Node2D = card.collider.get_parent()
-		if current_card.z_index > highest_z_index:
-			highest_z_card = current_card
-			highest_z_index = current_card.z_index
-	return highest_z_card
-
 func start_drag(card : Node2D):
 	card_being_dragged = card
 	# Detectar se a carta ja estava em um slot
@@ -73,10 +49,9 @@ func stop_drag():
 	if card_being_dragged:
 		var result = input_manager_ref.ray_cast_at_cursor()
 		var card_slot_found = input_manager_ref.find_card_slot(result)
-		if card_slot_found and not card_slot_found.card_in_slot and turn_manager_ref.user_turn == "Player preparation turn" and !have_place_monster_card_this_turn:
+		if card_slot_found and not card_slot_found.card_in_slot and turn_manager_ref.user_turn == "Player preparation turn":
 			if card_being_dragged.card_type == card_slot_found.card_slot_type:
-				if !have_place_monster_card_this_turn and player_mana_ref.use_mana(card_being_dragged.get_mana()):
-					have_place_monster_card_this_turn = true
+				if player_mana_ref.use_mana(card_being_dragged.get_mana()):
 					add_card_to_table(card_being_dragged, card_slot_found)
 					return		
 		player_hand_ref.add_card_to_hand(card_being_dragged)
@@ -91,10 +66,9 @@ func stop_drag():
 func chose_card(card : Node2D) -> void:
 	if !have_attack_card_this_turn:
 		if card_being_select == null:
-			if card_being_select == card:
-				card_being_select = null
-			else:
-				card_being_select = card
+			card_being_select = card
+		elif card_being_select == card:
+			card_being_select = null
 
 func opponent_target(card : Node2D) -> void:
 	if card_being_select != null:
@@ -126,6 +100,5 @@ func add_card_to_table(card: Node2D, card_slot_found: Node2D):
 #======== TURN MANAGEMENT ========#
 
 func end_turn():
-	have_place_monster_card_this_turn = false
 	have_attack_card_this_turn = false
 	card_deck_ref.have_drawed_card = false

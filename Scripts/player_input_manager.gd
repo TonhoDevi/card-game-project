@@ -57,12 +57,10 @@ func action_preparation_turn(result):
 func action_combat_turn(result):
 	var card_found = find_card_in_slot(result)
 	if card_found:
-		card_found.modulate = Color.RED
 		card_manager_ref.chose_card(card_found)
 		return
 	var opponent_found = find_opponent_in_slot(result)
 	if opponent_found:
-		opponent_found.modulate = Color.PINK
 		card_manager_ref.opponent_target(opponent_found)
 	
 func find_card_in_hand(result) -> Node2D:
