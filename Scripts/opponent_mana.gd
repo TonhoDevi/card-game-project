@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var opponent_mana_pool : int = 5
+@onready var opponent_mana_pool : int = 0
 var DADOS : Dictionary = {
 	"D4" : 4,
 	"D6" : 6,
@@ -14,6 +14,8 @@ func _ready() -> void:
 
 func add_mana(amount : int) -> void:
 	opponent_mana_pool += amount
+	if opponent_mana_pool > 10:
+		opponent_mana_pool = 10
 	update_visual()
 
 func gain_mana(dado : String) -> void:

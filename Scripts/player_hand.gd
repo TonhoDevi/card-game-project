@@ -2,7 +2,7 @@ extends Node2D
 
 const HAND_Y_POSITION : int = 975
 const CARD_WIDTH : int = 150
-const CARD_DRAW_SPEED : float = 1.0
+const CARD_DRAW_SPEED : float = 0.75
 var player_hand : Array = []
 var centre_screen_x : float
 # Called when the node enters the scene tree for the first time.

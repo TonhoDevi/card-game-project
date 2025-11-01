@@ -36,20 +36,25 @@ func minimize_card(card):
 	card.modulate = Color(1,1,1,1)
 
 # Helper function to animate card attack
-func animate_card_attack(card: Node2D, target_position: Vector2) -> void:
+func animate_card_attack(card: Node2D, target: Node2D) -> void:
 	card.z_index = 8
 	var tween : Tween = get_tree().create_tween()
 	var original_position : Vector2 = card.position
-	var attack_position : Vector2 = target_position
-	tween.tween_property(card, "position", attack_position, 0.25)
-	timer.start(0.25)
-	await timer.timeout
+	var attack_position : Vector2 = target.position
+	await tween.tween_property(card, "position", attack_position, 0.25).finished
+	shake_node(target)
 	var tween2 : Tween = get_tree().create_tween()
-	tween2.tween_property(card, "position", original_position, 0.25)
-	timer.start(0.25)
-	await timer.timeout
+	await tween2.tween_property(card, "position", original_position, 0.25).finished
 	card.z_index = 0
 
-
+func shake_node(node : Node2D):
+	var grau: int = 15
+	for num in 5:
+		var tween : Tween = get_tree().create_tween()
+		tween.tween_property(node, "rotation_degrees", grau, 0.05)
+		grau *= -1
+		await get_tree().create_timer(0.05).timeout
+	node.rotation_degrees = 0
+	
 func car_select(card : Node2D) -> void:
 	card.emit_particles()

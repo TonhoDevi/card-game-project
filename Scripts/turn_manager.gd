@@ -12,10 +12,12 @@ extends Node
 @onready var player_mana_ref: Node2D = $"../PlayerMana"
 
 @export var wait_time: float = 1.0
-@onready var game_phase: String = "preparation_phase"
-@onready var user_turn : String = "Player preparation turn"
+@onready var game_phase: String = "start_phase"
+@onready var user_turn : String = "Intro turn"
 
 # Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	define_visual_turn("Intro turn", true)
 
 func _on_end_turno_pressed() -> void:
 	if game_phase == "preparation_phase":
@@ -31,7 +33,7 @@ func _on_end_turno_pressed() -> void:
 		game_phase =  "preparation_phase"
 	
 func start_opponent_preparation_turn() -> void:
-	opponent_mana_ref.gain_mana("D6")
+	opponent_mana_ref.add_mana(3)
 	define_visual_turn("Opponent preparation turn", false)
 	turn_timer_ref.start(wait_time)
 	await turn_timer_ref.timeout
@@ -44,31 +46,33 @@ func end_opponent_preparation_turn() -> void:
 	
 func start_opponent_combat_turn():
 	define_visual_turn("Opponent combat turn", false)
-	turn_timer_ref.start(wait_time)
+	turn_timer_ref.start(wait_time/3)
 	await turn_timer_ref.timeout
 	opponent_ia_ref.start_combat_turn()
 
 func end_opponent_combat_turn() -> void:
 	input_manager_ref.change_game_phase("preparation_phase")
-	turn_timer_ref.start(wait_time)
+	turn_timer_ref.start(wait_time/2)
 	await turn_timer_ref.timeout
 	start_player_preparation_turn()
 
 func start_player_preparation_turn():
-	player_mana_ref.gain_mana("D6")
+	player_mana_ref.add_mana(3)
 	end_turn_active_button(true)
 	define_visual_turn("Player preparation turn", true)
 	
 func end_player_preparation_turn():
-	pass
+	_on_end_turno_pressed()
 	
 func start_player_combat_turn() -> void:
 	define_visual_turn("Player combat turn", true)
+	if player_mana_ref.player_mana_pool == 0:
+		end_player_combat_turn()
 	turn_timer_ref.start(wait_time)
 	await turn_timer_ref.timeout
 
 func end_player_combat_turn():
-	pass
+	_on_end_turno_pressed()
 
 
 func end_turn_active_button(trigger : bool) -> void :

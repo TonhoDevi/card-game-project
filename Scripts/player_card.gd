@@ -15,15 +15,15 @@ var start_position : Vector2
 var card_slot_card_is_in : Node
 var card_type : String
 
-var health : float
-var attack : float
+var health : int
+var attack : int
 var mana : int
 
-var temp_health : float
-var temp_attack : float
+var temp_health : int
+var temp_attack : int
 var temp_mana : int
 
-func set_power(att: float, heal : float, mn : int) -> void:
+func set_power(att: int, heal : int, mn : int) -> void:
 	health = heal
 	temp_health = heal
 	attack = att
@@ -32,9 +32,9 @@ func set_power(att: float, heal : float, mn : int) -> void:
 	temp_mana = mn
 	update_info()
 
-func get_attack() -> float:
+func get_attack() -> int:
 	return temp_attack
-func get_health() -> float:
+func get_health() -> int:
 	return temp_health
 func get_mana() -> int :
 	return temp_mana
@@ -47,14 +47,14 @@ func clean_power_heal() -> void:
 func clean_power_mana() -> void:
 	temp_mana = mana
 
-func set_attack(add : float, mult : float, type : String) -> void:
+func set_attack(add : int, mult : int, type : String) -> void:
 	if type == "add":
 		temp_attack += add
 	elif type == "mult":
 		temp_attack *= mult
 	update_info()
 		
-func set_health(add : float, mult : float, type : String) -> void:
+func set_health(add : int, mult : int, type : String) -> void:
 	if type == "add":
 		temp_health += add
 	elif type == "mult":
@@ -64,9 +64,9 @@ func set_health(add : float, mult : float, type : String) -> void:
 		dead_of_card()
 	
 func update_info() -> void:
-	attack_label.text = str(int(temp_attack))
-	health_label.text = str(int(temp_health))
-	mana_cost_label.text = str(int(temp_mana))
+	attack_label.text = str(temp_attack)
+	health_label.text = str(temp_health)
+	mana_cost_label.text = str(temp_mana)
 	
 func dead_of_card():
 	card_gravy_yard.add_card_to_gravy_yard(self)

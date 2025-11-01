@@ -129,11 +129,13 @@ script = ExtResource("3_vy5pj")
 [node name="Timer" type="Timer" parent="VisualManager"]
 
 [node name="OpponentCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
-position = Vector2(1248, 712)
+position = Vector2(672, 360)
+scale = Vector2(0.75, 0.75)
 script = ExtResource("9_0sclb")
 
 [node name="PlayerCardGravyYard" parent="." instance=ExtResource("16_erwvk")]
-position = Vector2(670, 360)
+position = Vector2(1240, 712)
+scale = Vector2(0.75, 0.75)
 
 [node name="OpponentMana" parent="." instance=ExtResource("10_0sclb")]
 position = Vector2(1240, 480)

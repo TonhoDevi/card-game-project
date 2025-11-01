@@ -3,7 +3,7 @@ extends Node2D
 @onready var opponent_mana: Node2D = $"../OpponentMana"
 const HAND_Y_POSITION : int = 100
 const CARD_WIDTH : int = 150
-const CARD_DRAW_SPEED : float = 0.7
+const CARD_DRAW_SPEED : float = 0.25
 var opponent_hand : Array = []
 var centre_screen_x : float
 # Called when the node enters the scene tree for the first time.

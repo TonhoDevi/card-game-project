@@ -58,12 +58,11 @@ func start_combat_turn() -> void:
 		end_combat_turn()
 		return
 	perform_attack(attacker_card, target_card)
-	timer.start(wait_time_between_actions)
+	timer.start(wait_time_between_actions/2)
 	await timer.timeout
 	end_combat_turn()
 
 func end_combat_turn() -> void:
-	print("acabou de atacar")
 	turn_manager_ref.end_opponent_combat_turn()
 
 	
@@ -113,7 +112,10 @@ func play_hero_card(card_node: Node2D, slot_node: Node2D) -> void:
 
 func perform_attack(attacker_card: Node2D, target_card: Node2D) -> void:
 	# Animate attack
-	visual_manager.animate_card_attack(attacker_card, target_card.position)
+	if !opponent_mana.use_mana(1):
+		end_combat_turn()
+		return
+	visual_manager.animate_card_attack(attacker_card, target_card)
 	battle_manager.attack(attacker_card,target_card,"add")
 	timer.start(wait_time_between_actions)
 	await timer.timeout

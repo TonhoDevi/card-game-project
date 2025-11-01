@@ -81,7 +81,9 @@ func opponent_target(card : Node2D) -> void:
 		input_manager_ref.can_click = true
 
 func perform_attack(player_card : Node2D, opponent_card : Node2D) -> void:
-	visual_manager_ref.animate_card_attack(player_card, opponent_card.position)
+	if !player_mana_ref.use_mana(1):
+		return
+	visual_manager_ref.animate_card_attack(player_card, opponent_card)
 	battle_manager_ref.attack(player_card, opponent_card, "add")
 	
 

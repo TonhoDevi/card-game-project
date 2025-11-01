@@ -4,9 +4,11 @@ extends Node2D
 @onready var area_2d: Area2D = $Area2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
-@onready var turn_manager: Node = $"../TurnManager"
-@onready var player_hand: Node2D = $"../PlayerHand"
-@onready var card_manager: Node2D = $"../PlayerCardManager"
+@onready var turn_manager_ref: Node = $"../TurnManager"
+@onready var player_hand_ref: Node2D = $"../PlayerHand"
+@onready var card_manager_ref: Node2D = $"../PlayerCardManager"
+@onready var player_mana_ref: Node2D = $"../PlayerMana"
+@onready var visual_manager_ref: Node2D = $"../VisualManager"
 
 
 
@@ -26,11 +28,20 @@ func _ready() -> void:
 
 func draw_deck():
 	# Prevent drawing multiple cards at once
-	if have_drawed_card:
-		return
-	have_drawed_card = true
+	#if have_drawed_card:
+		#return
+	#have_drawed_card = true
 	# Draw the top card from the deck
 	var card_drawn_name: String = player_deck[0]
+	if player_hand_ref.player_hand.size() <= 4:
+		if player_mana_ref.use_mana(1):
+			create_card(card_drawn_name)
+		else:
+			visual_manager_ref.shake_node(self)
+			return
+	else:
+		visual_manager_ref.shake_node(self)
+		return
 	player_deck.erase(card_drawn_name)
 	# Check if deck is empty
 	if player_deck.size() == 0:
@@ -38,14 +49,13 @@ func draw_deck():
 		sprite_2d.visible = false
 		rich_text_label.visible = false
 	# Create new card instance
-	create_card(card_drawn_name)
 	
 
 func add_card(new_card: Node2D) -> Node2D :
-	card_manager.add_child(new_card)
+	card_manager_ref.add_child(new_card)
 	new_card.name = "PlayerCard"
 	new_card.get_node("AnimationPlayer").play("card_flip")
-	player_hand.add_card_to_hand(new_card)
+	player_hand_ref.add_card_to_hand(new_card)
 	rich_text_label.text = str(player_deck.size())
 	return new_card
 	
