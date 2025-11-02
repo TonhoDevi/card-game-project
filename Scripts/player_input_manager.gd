@@ -51,7 +51,7 @@ func action_preparation_turn(result):
 		return
 	var deck_found = find_deck(result)
 	if deck_found:
-		deck_ref.draw_deck()
+		deck_ref.draw_deck(false)
 		return
 
 func action_combat_turn(result):

@@ -1,13 +1,18 @@
 extends Node2D
 
 @onready var card_gravy_yard: Node2D = $"../../OpponentCardGravyYard"
-@onready var attack_label: RichTextLabel = $Control/Attack
-@onready var health_label: RichTextLabel = $Control/Health
-@onready var mana_cost_label: RichTextLabel = $Control/ManaCost
+@onready var opponent_table: Node2D = $"../../OpponentTable"
+@onready var mana_cost_label: RichTextLabel = $Body/Control/ManaCost
+
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_label: RichTextLabel = $Body/Control/Attack
+@onready var health_label: RichTextLabel = $Body/Control/Health
 @onready var area_2d: Area2D = $Area2D
 
+const card_user = "Opponent"
+
 var start_position : Vector2
-var card_slot_card_is_in : Node
+var card_slot_ref : Node
 var card_type : String
 var vci_ref : Node
 
@@ -44,26 +49,49 @@ func clean_power_heal() -> void:
 func clean_power_mana() -> void:
 	temp_mana = mana
 
-func set_attack(add : int, mult : int, type : String) -> void:
-	if type == "add":
-		temp_attack += add
-	elif type == "mult":
-		temp_attack *= mult
+func set_attack(damage : int) -> void:
+	temp_attack += damage
 	update_info()
 		
-func set_health(add : int, mult : int, type : String) -> void:
-	if type == "add":
-		temp_health += add
-	elif type == "mult":
-		temp_health *= mult
-	update_info()
+func take_damage(damage : int) -> void:
+	temp_health += damage
 	if temp_health <= 0:
+		temp_health = 0
 		dead_of_card()
+	animation_player.play("take_damage")
+	update_info()
+	
+func dead_of_card() -> void:
+	await animation_player.animation_finished
+	card_slot_ref.card_in_slot_ref = null
+	card_slot_ref.card_in_slot = false
+	if card_type == "Hero":
+		opponent_table.cards_on_hero_table.erase(self)
+	else:
+		opponent_table.cards_on_magic_table.erase(self)
+	card_gravy_yard.add_card_to_gravy_yard(self)
 	
 func update_info() -> void:
 	attack_label.text = str(temp_attack)
+	if temp_attack < attack:
+		attack_label.modulate = Color.RED
+	elif temp_attack == attack :
+		attack_label.modulate = Color.WHITE
+	else:
+		attack_label.modulate = Color.LAWN_GREEN
+		
 	health_label.text = str(temp_health)
+	if temp_health < health:
+		health_label.modulate = Color.RED
+	elif temp_health == health :
+		health_label.modulate = Color.WHITE
+	else:
+		health_label.modulate = Color.LAWN_GREEN
+		
 	mana_cost_label.text = str(temp_mana)
-
-func dead_of_card():
-	card_gravy_yard.add_card_to_gravy_yard(self)
+	if temp_mana < mana:
+		mana_cost_label.modulate = Color.RED
+	elif temp_mana == mana :
+		mana_cost_label.modulate = Color.WHITE
+	else:
+		mana_cost_label.modulate = Color.LAWN_GREEN

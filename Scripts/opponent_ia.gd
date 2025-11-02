@@ -4,9 +4,9 @@ extends Node2D
 @onready var opponent_card_deck_ref: Node2D = $"../OpponentCardDeck"
 @onready var turn_manager_ref: Node = $"../TurnManager"
 @onready var player_table_ref: Node2D = $"../PlayerTable"
-@onready var visual_manager: Node2D = $"../VisualManager"
-@onready var battle_manager: Node = $"../BattleManager"
-@onready var opponent_mana: Node2D = $"../OpponentMana"
+@onready var visual_manager_ref: Node2D = $"../VisualManager"
+@onready var battle_manager_ref: Node = $"../BattleManager"
+@onready var opponent_mana_ref: Node2D = $"../OpponentMana"
 
 
 @onready var timer: Timer = $"Timer"
@@ -71,7 +71,7 @@ func end_combat_turn() -> void:
 func buy_card_from_deck() -> void:
 	if opponent_card_deck_ref.opponent_deck.size() == 0:
 		return 
-	opponent_card_deck_ref.draw_deck()
+	opponent_card_deck_ref.draw_deck(false)
 
 func get_free_magic_slot() -> Node2D:
 	var magic_table : Node = opponent_table_ref.get_child(0)
@@ -89,34 +89,37 @@ func get_free_hero_slot() -> Node2D:
 
 func play_magic_card(card_node: Node2D, slot_node: Node2D) -> void:
 	opponent_hand_ref.remove_card_from_hand(card_node)
+	opponent_table_ref.add_card_to_table(card_node, card_node.card_type)
 	slot_node.card_in_slot = true
 	slot_node.card_in_slot_ref = card_node
-	card_node.card_slot_card_is_in = slot_node
+	card_node.card_slot_ref = slot_node
 	card_node.get_node("Area2D").collision_mask = 64
 	card_node.get_node("AnimationPlayer").play("card_flip")
 	opponent_hand_ref.animate_card_to_position(card_node, slot_node.position)
-	visual_manager.minimize_card(card_node)
+	visual_manager_ref.minimize_card(card_node)
 
 func play_hero_card(card_node: Node2D, slot_node: Node2D) -> void:
 	opponent_hand_ref.remove_card_from_hand(card_node)
+	opponent_table_ref.add_card_to_table(card_node, card_node.card_type)
 	slot_node.card_in_slot = true
 	slot_node.card_in_slot_ref = card_node
-	card_node.card_slot_card_is_in = slot_node
+	card_node.card_slot_ref = slot_node
 	card_node.get_node("Area2D").collision_mask = 64
 	card_node.get_node("AnimationPlayer").play("card_flip")
 	opponent_hand_ref.animate_card_to_position(card_node, slot_node.position)
-	visual_manager.minimize_card(card_node)
+	visual_manager_ref.minimize_card(card_node)
 
 
 # ============== Combat Logic ==============
 
 func perform_attack(attacker_card: Node2D, target_card: Node2D) -> void:
 	# Animate attack
-	if !opponent_mana.use_mana(1):
+	if !opponent_mana_ref.use_mana(1):
 		end_combat_turn()
 		return
-	visual_manager.animate_card_attack(attacker_card, target_card)
-	battle_manager.attack(attacker_card,target_card,"add")
+	await visual_manager_ref.animate_card_attack(attacker_card, target_card)
+	battle_manager_ref.attack(attacker_card,target_card)
+	visual_manager_ref.animate_card_retrive(attacker_card, target_card)
 	timer.start(wait_time_between_actions)
 	await timer.timeout
 

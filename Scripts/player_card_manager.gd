@@ -2,8 +2,12 @@ extends Node2D
 
 @onready var player_mana_ref: Node2D = $"../PlayerMana"
 @onready var player_hand_ref : Node2D = $"../PlayerHand"
-@onready var card_deck_ref : Node2D = $"../PlayerCardDeck"
+@onready var player_card_deck_ref : Node2D = $"../PlayerCardDeck"
 @onready var player_table_ref : Node2D = $"../PlayerTable"
+
+@onready var opponent_ia_ref: Node2D = $"../OpponentIA"
+@onready var opponent_table_ref: Node2D = $"../OpponentTable"
+
 @onready var visual_manager_ref: Node2D = $"../VisualManager"
 @onready var battle_manager_ref: Node = $"../BattleManager"
 @onready var input_manager_ref: Node2D = $"../InputManager"
@@ -37,12 +41,12 @@ func _process(_delta: float) -> void:
 func start_drag(card : Node2D):
 	card_being_dragged = card
 	# Detectar se a carta ja estava em um slot
-	if !card_being_dragged.card_slot_card_is_in:
+	if !card_being_dragged.card_slot_ref:
 		var result = input_manager_ref.ray_cast_at_cursor()
 		var card_slot = input_manager_ref.find_card_slot(result)
 		if card_slot:
 			card_slot.card_in_slot = false
-		card_being_dragged.card_slot_card_is_in = null
+		card_being_dragged.card_slot_ref = null
 	
 # Stop dragging the card 
 func stop_drag():
@@ -55,7 +59,7 @@ func stop_drag():
 					add_card_to_table(card_being_dragged, card_slot_found)
 					return		
 		player_hand_ref.add_card_to_hand(card_being_dragged)
-		card_being_dragged.card_slot_card_is_in = null
+		card_being_dragged.card_slot_ref = null
 		card_being_dragged.z_index = 0
 		card_being_dragged = null
 		player_hand_ref.update_hand_positions()
@@ -83,24 +87,26 @@ func opponent_target(card : Node2D) -> void:
 func perform_attack(player_card : Node2D, opponent_card : Node2D) -> void:
 	if !player_mana_ref.use_mana(1):
 		return
-	visual_manager_ref.animate_card_attack(player_card, opponent_card)
-	battle_manager_ref.attack(player_card, opponent_card, "add")
-	
+	await visual_manager_ref.animate_card_attack(player_card, opponent_card)
+	battle_manager_ref.attack(player_card, opponent_card)
+	visual_manager_ref.animate_card_retrive(player_card,opponent_card)
 
 # ======== Card Placement ======== #
 func add_card_to_table(card: Node2D, card_slot_found: Node2D):
 	player_hand_ref.remove_card_from_hand(card)
 	player_table_ref.add_card_to_table(card, card.card_type)
 	card.z_index = -1
-	card.card_slot_card_is_in = card_slot_found
+	card.card_slot_ref = card_slot_found
 	card.position = card_slot_found.position
 	visual_manager_ref.minimize_card(card)
 	card_slot_found.card_in_slot = true
 	card_slot_found.card_in_slot_ref = card
 	card_being_dragged = null
+	if card.card_type == "Magic":
+		card.trigger_ability(card, opponent_table_ref, 0, self, opponent_ia_ref)
 
 #======== TURN MANAGEMENT ========#
 
 func end_turn():
 	have_attack_card_this_turn = false
-	card_deck_ref.have_drawed_card = false
+	player_card_deck_ref.have_drawed_card = false

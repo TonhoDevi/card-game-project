@@ -15,32 +15,32 @@ extends Node2D
 var player_deck : Array = ["Pachorro", "Wargato", "Ranbara", "Espirito_Protetor", "Orbe_Pirotecnica", "Estandarte_De_Cura", "Ranbara", "Wargato"]
 var card_data_ref
 var have_drawed_card: bool = false
-var STARTER_DECK_SIZE: int = 3
+var STARTER_DECK_SIZE: int = 0
 
 func _ready() -> void:
 	player_deck.shuffle() #
-	rich_text_label.text = str(player_deck.size())
+	rich_text_label.text = str(player_deck.size()+1)
 	card_data_ref = preload("res://Scripts/universal_card_data_base.gd")
 	for i in range(STARTER_DECK_SIZE):
-		draw_deck()
+		draw_deck(true)
 		have_drawed_card = false
 	have_drawed_card = true 
 
-func draw_deck():
+func draw_deck(no_mana : bool):
 	# Prevent drawing multiple cards at once
 	#if have_drawed_card:
 		#return
 	#have_drawed_card = true
 	# Draw the top card from the deck
 	var card_drawn_name: String = player_deck[0]
-	if player_hand_ref.player_hand.size() <= 4:
+	if no_mana:
+		create_card(card_drawn_name)
+	elif player_hand_ref.player_hand.size() <= 4:
 		if player_mana_ref.use_mana(1):
 			create_card(card_drawn_name)
 		else:
-			visual_manager_ref.shake_node(self)
 			return
 	else:
-		visual_manager_ref.shake_node(self)
 		return
 	player_deck.erase(card_drawn_name)
 	# Check if deck is empty
@@ -67,4 +67,5 @@ func create_card(card_drawn_name : String)->void:
 	
 	card_ref.set_power(card_data_ref.CARD_DATA[card_drawn_name][0], card_data_ref.CARD_DATA[card_drawn_name][1], card_data_ref.CARD_DATA[card_drawn_name][2])
 	card_ref.card_type = card_data_ref.CARD_DATA[card_drawn_name][3]
-	card_ref.get_node("CardImage").texture = load(card_image_path)
+	card_ref.set_ability(card_data_ref.CARD_DATA[card_drawn_name][4])
+	card_ref.get_node("Body/CardImage").texture = load(card_image_path)

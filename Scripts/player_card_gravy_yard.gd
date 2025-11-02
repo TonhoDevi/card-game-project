@@ -13,11 +13,11 @@ func add_card_to_gravy_yard(card: Node2D):
 		gravy_yard.insert(0,card)
 		card.get_node("Area2D").collision_mask = 128
 		animate_card_to_position(card)
-		var slot = card.card_slot_card_is_in
+		var slot = card.card_slot_ref
 		if slot:
 			slot.card_in_slot = false
 			slot.card_in_slot_ref = null
-		card.card_slot_card_is_in = null
+		card.card_slot_ref = null
 		
 
 

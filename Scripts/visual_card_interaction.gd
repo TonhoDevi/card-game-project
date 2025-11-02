@@ -11,12 +11,12 @@ func connect_card_signals(card: Node2D) -> void:
 
 # Helper functions for card hovering
 func on_card_mouse_entered(card: Node2D) -> void:
-	if !card.card_slot_card_is_in:
+	if !card.card_slot_ref:
 		highlight_card(card,true)
 	
 # Helper functions for card hovering
 func on_card_mouse_exited(card: Node2D) -> void:
-	if !card.card_slot_card_is_in:
+	if !card.card_slot_ref:
 		highlight_card(card,false)
 
 # Helper function to highlight cards
@@ -39,22 +39,14 @@ func minimize_card(card):
 func animate_card_attack(card: Node2D, target: Node2D) -> void:
 	card.z_index = 8
 	var tween : Tween = get_tree().create_tween()
-	var original_position : Vector2 = card.position
 	var attack_position : Vector2 = target.position
 	await tween.tween_property(card, "position", attack_position, 0.25).finished
-	shake_node(target)
-	var tween2 : Tween = get_tree().create_tween()
-	await tween2.tween_property(card, "position", original_position, 0.25).finished
+	
+func animate_card_retrive(card: Node2D, target: Node2D) -> void:
+	var tween : Tween = get_tree().create_tween()
+	var original_position : Vector2 = card.card_slot_ref.position
+	await tween.tween_property(card, "position", original_position, 0.25).finished
 	card.z_index = 0
-
-func shake_node(node : Node2D):
-	var grau: int = 15
-	for num in 5:
-		var tween : Tween = get_tree().create_tween()
-		tween.tween_property(node, "rotation_degrees", grau, 0.05)
-		grau *= -1
-		await get_tree().create_timer(0.05).timeout
-	node.rotation_degrees = 0
 	
 func car_select(card : Node2D) -> void:
 	card.emit_particles()

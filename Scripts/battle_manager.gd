@@ -10,7 +10,7 @@ var universal_opponent_buff : int = 1.0
 func apply_universal_buff(card: Node2D) -> int:
 	return 2.0
 	
-func attack(card : Node2D, target : Node2D, type : String)-> void:
+func attack(card : Node2D, target : Node2D)-> void:
 	var damage : int = card.get_attack()
-	target.set_health(-damage, -damage, type)
+	target.take_damage(-damage)
 	

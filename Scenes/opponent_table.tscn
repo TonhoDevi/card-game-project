@@ -8,31 +8,35 @@ script = ExtResource("1_bix02")
 
 [node name="Magics" type="Node" parent="."]
 
-[node name="OpponentCardSlot1" parent="Magics" instance=ExtResource("3_bix02")]
+[node name="OpponentCardmagicSlot1" parent="Magics" instance=ExtResource("3_bix02")]
 z_index = -2
 position = Vector2(816, 272)
 card_slot_type = "Magic"
 
-[node name="OpponentCardSlot2" parent="Magics" instance=ExtResource("3_bix02")]
+[node name="OpponentCardMagicSlot2" parent="Magics" instance=ExtResource("3_bix02")]
 z_index = -2
 position = Vector2(960, 272)
 card_slot_type = "Magic"
+slot_num = 2
 
-[node name="OpponentCardSlot3" parent="Magics" instance=ExtResource("3_bix02")]
+[node name="OpponentCardMagicSlot3" parent="Magics" instance=ExtResource("3_bix02")]
 z_index = -2
 position = Vector2(1104, 272)
 card_slot_type = "Magic"
+slot_num = 3
 
 [node name="Heroes" type="Node" parent="."]
 
-[node name="OpponentCardSlot4" parent="Heroes" instance=ExtResource("3_bix02")]
+[node name="OpponentCardHeroSlot1" parent="Heroes" instance=ExtResource("3_bix02")]
 z_index = -2
-position = Vector2(1104, 447)
+position = Vector2(816, 447)
 
-[node name="OpponentCardSlot5" parent="Heroes" instance=ExtResource("3_bix02")]
+[node name="OpponentCardHeroSlot2" parent="Heroes" instance=ExtResource("3_bix02")]
 z_index = -2
 position = Vector2(960, 447)
+slot_num = 2
 
-[node name="OpponentCardSlot6" parent="Heroes" instance=ExtResource("3_bix02")]
+[node name="OpponentCardHeroSlot3" parent="Heroes" instance=ExtResource("3_bix02")]
 z_index = -2
-position = Vector2(816, 448)
+position = Vector2(1104, 448)
+slot_num = 3

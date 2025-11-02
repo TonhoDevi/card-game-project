@@ -8,31 +8,35 @@ script = ExtResource("1_lmtap")
 
 [node name="Magics" type="Node" parent="."]
 
-[node name="CardSlot1" parent="Magics" instance=ExtResource("2_2jqcc")]
-z_index = -2
-position = Vector2(816, 798.99994)
-card_slot_type = "Magic"
-
-[node name="CardSlot2" parent="Magics" instance=ExtResource("2_2jqcc")]
-z_index = -2
-position = Vector2(960, 798.99994)
-card_slot_type = "Magic"
-
-[node name="CardSlot3" parent="Magics" instance=ExtResource("2_2jqcc")]
+[node name="PlayerCardMagicSlot1" parent="Magics" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(1104, 799)
 card_slot_type = "Magic"
 
+[node name="PlayerCardMagicSlot2" parent="Magics" instance=ExtResource("2_2jqcc")]
+z_index = -2
+position = Vector2(960, 798.99994)
+card_slot_type = "Magic"
+slot_num = 2
+
+[node name="PlayerCardMagicSlot3" parent="Magics" instance=ExtResource("2_2jqcc")]
+z_index = -2
+position = Vector2(816, 798.99994)
+card_slot_type = "Magic"
+slot_num = 3
+
 [node name="Heroes" type="Node" parent="."]
 
-[node name="CardSlot4" parent="Heroes" instance=ExtResource("2_2jqcc")]
+[node name="PlayerCardHeroSlot1" parent="Heroes" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(1104, 624)
 
-[node name="CardSlot5" parent="Heroes" instance=ExtResource("2_2jqcc")]
+[node name="PlayerCardHeroSlot2" parent="Heroes" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(960, 624)
+slot_num = 2
 
-[node name="CardSlot6" parent="Heroes" instance=ExtResource("2_2jqcc")]
+[node name="PlayerCardHeroSlot3" parent="Heroes" instance=ExtResource("2_2jqcc")]
 z_index = -2
 position = Vector2(816, 624)
+slot_num = 3
